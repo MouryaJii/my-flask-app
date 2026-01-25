@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=7">
+        <link rel="stylesheet" type="text/css"
+            href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+        <link rel="icon" href="../static/images/websiteicon.png"
+            type="image/x-icon">
+        <title>FoodieGuys | Menu</title>
+        <link rel="stylesheet" href="../static/css/backtotop.css">
+        <link rel="stylesheet" href="../static/css/style.css">
+        <link rel="stylesheet" href="../static/css/menu.css">
+        <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css'
+            rel='stylesheet'>
+
+    </head>
+
+    <body>
+        <div class="main-wrapper">
+            <div class="nav-background">
+                <div class="mobile-logo">
+                    <img src="../static/icons/logo.svg" alt>
+                </div>
+                <div class="mobile-nav">
+                    <div class="cart">
+                        <div class="flex items-center">
+                            <img src="../static/icons/cart-dark.svg" alt>
+                            <a href="javascript:void(0)" onclick="openCart()"
+                                class="cart-count"> 0 items </a>
+                        </div>
+                    </div>
+                    <div class="nav-top">
+                        <ul>
+                            <li>
+                                <a href="{{ url_for('index') }}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('about') }}">About us</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('menu') }}">Menu</a>
+                            </li>
+                            <!-- <li>
+                                <a href="#">Blog</a>
+                            </li> -->
+                            <!-- <li>
+                                <a href="#">Shop</a>
+                            </li> -->
+                            <li>
+                                <a href="#">Services</a>
+                            </li>
+                            <li>
+                                <a href="#">Contact us</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('logout') }}">Logout</a>
+                            </li>
+                            <li>
+                                <a href="#">Register Now</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contact flex items-center">
+                        <img src="../static/icons/phone.svg" alt>
+                        <div>
+                            <h5>Call Us : (+91) 00000-00000</h5>
+                            <h6>E-mail : foodyguys@gmail.com</h6>
+                        </div>
+                    </div>
+                    <div class="time flex items-center">
+                        <img src="../static/icons/clock.svg" alt>
+                        <div>
+                            <h5>Working hours</h5>
+                            <h6>Mon-sat (8:00am - 12:00am)</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="site-content-wrapper">
+                <div class="nav-trigger">
+                    <!-- <button id="menu-hamburger" aria-label="Toggle Menu"> -->
+                    <svg width="30" height="30" viewBox="0 0 30 30"
+                        fill="none" xmlns="www.w3.org">
+                        <path d="M4 8H26" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" />
+                        <path d="M4 15H26" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" />
+                        <path d="M4 22H26" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" />
+                    </svg>
+                    <!-- </button> -->
+                </div>
+                <div class="site-content">
+                    <header class="topbar1">
+                        <div
+                            class="container flex justify-between items-center">
+                            <div class="icons">
+
+                                <a href="{{ url_for('home') }}">Home</a>
+                                <a href="{{ url_for('about') }}">About</a>
+                                <a href="{{ url_for('menu') }}">Menu</a>
+                                <!-- <a href="#">Gallery</a> -->
+                                <a href="#">Contact</a>
+                            </div>
+                            <div class="auth flex items-center">
+
+                                <div>
+                                    <img src="../static/icons/user-icon.svg"
+                                        alt>
+                                    <a href="{{ url_for('logout') }}">Logout</a>
+
+                                </div>
+                                <span class="divider">|</span>
+                                <div>
+                                    <img src="../static/icons/edit.svg" alt>
+                                    <a href="#">register now</a>
+                                </div>
+                                <span class="divider">|</span>
+                                <div>
+                                    <img src="../static/icons/cart.svg" alt>
+                                    <a href="javascript:void(0)"
+                                        onclick="openCart()" class="cart-count">
+                                        0 items </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- HERO SECTION -->
+                    <section class="menu-hero">
+                        <span class="since">Serving Food Lovers Since
+                            2016</span>
+                        <h1>Savor Every Bite,<br><span>Savor Every
+                                Moment</span></h1>
+                        <p>Fresh ingredients, bold flavors, and dishes made with
+                            love. Explore our delicious menu.</p>
+                    </section>
+
+                    <!-- CATEGORY BUTTON SECTION -->
+                    <div class="category-section">
+                        <button class="category-btn" id="categoryBtn">
+                            Explore Food Category ⌄
+                        </button>
+
+                        <div class="category-dropdown " id="categoryDropdown">
+                            <div class="show">
+                                <div class="category-grid">
+                                    <button
+                                        onclick="scrollToCategory('Starters')">
+                                        Starters</button>
+                                    <button
+                                        onclick="scrollToCategory('dal')">
+                                        Dal</button>
+                                    <button
+                                        onclick="scrollToCategory('rise')">
+                                        Rise</button>
+                                    <button
+                                        onclick="scrollToCategory('vegitables')">
+                                        Vegitables</button>
+                                    <button
+                                        onclick="scrollToCategory('chapaties')">
+                                        Chapaties</button>
+                                    <button
+                                        onclick="scrollToCategory('main-cource')">
+                                        Main-Cource</button>
+
+                                    <button
+                                        onclick="scrollToCategory('rolls')">
+                                        Rolls</button>
+                                    <button
+                                        onclick="scrollToCategory('soup')">
+                                        Soup</button>
+                                    <button
+                                        onclick="scrollToCategory('salad')">
+                                        Salad</button>
+
+                                    <!-- yaha sirf button add karte jao -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MENU SECTION: pizza -->
+                    <section id="Starters" class="menu-section">
+
+                        <h2>Starters</h2>
+                        <!-- <p class="subtitle">Choose your favorite dishes</p> -->
+
+                        <!-- CATEGORY FILTER -->
+                        <div class="filter-btns">
+                            <button class="filter active"
+                                data-filter="all">All</button>
+                            <button class="filter"
+                                data-filter="veg">Veg</button>
+                            <button class="filter"
+                                data-filter="nonveg">Non-Veg</button>
+                        </div>
+
+                        <div class="menu-grid">
+
+                            <!-- ITEM -->
+                            <div class="menu-card veg" data-id="Frech-Frise"
+                                data-name="Frech Frise" data-price="50">
+                                <div class="menu-info">
+                                    <h3>Frech Frise</h3>
+                                    <p class="desc">Vegetarian</p>
+                                    <span class="price">&#8377;50</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+
+                                        <button class="order-btn">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877">
+                                </div>
+                            </div>
+
+                            <div class="menu-card veg" data-id="spring-roll"
+                                data-name="Spring Roll" data-price="70">
+                                <div class="menu-info">
+                                    <h3>Spring Roll</h3>
+                                    <p class="desc">light, Crispy & Flavor
+                                        Packed</p>
+                                    <span class="price">&#8377;70</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                </div>
+                            </div>
+
+                            <div class="menu-card veg" data-id="Bada-Fry"
+                                data-name="Bada Fry" data-price="20">
+                                <div class="menu-info">
+                                    <h3>Bada Fry</h3>
+                                    <p class="desc">Crispy fried vadas coated
+                                        with spicy masala for a bold and
+                                        <br>irresistible taste.</p>
+                                    <span class="price">&#8377;20</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                </div>
+                            </div>
+
+                            <div class="menu-card nonveg"
+                                data-id="Chilly-Chiken"
+                                data-name="Chilly-Chiken" data-price="40">
+                                <div class="menu-info">
+                                    <h3>Chilly-Chiken</h3>
+                                    <p class="desc">Crispy chicken chunks
+                                        stir-fried with green chillies,<br>
+                                        capsicum, and onions in classic
+                                        Indo-Chinese style.</p>
+                                    <span class="price">&#8377;40</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                </div>
+                            </div>
+
+                            <div class="menu-card veg" data-id="veg-catlet"
+                                data-name="Veg Catlet" data-price="30">
+                                <div class="menu-info">
+                                    <h3>Veg Catlet</h3>
+                                    <p class="desc">Fresh mixed vegetables
+                                        blended with mild spices,<br>
+                                        crumb-coated and fried till golden
+                                        crisp.</p>
+                                    <span class="price">&#8377;30</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1625944525903-b2b9e5d40f3a">
+                                </div>
+                            </div>
+
+                            <div class="menu-card nonveg" data-id="chicken-65"
+                                data-name="chicken 65" data-price="100">
+                                <div class="menu-info">
+                                    <h3>Chicken 65</h3>
+                                    <p class="desc">Deep-fried chicken tossed
+                                        with curry leaves, green chillies,<br>
+                                        and signature South Indian spices.</p>
+                                    <span class="price">&#8377;100</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                </div>
+                            </div>
+
+                            <div class="menu-card nonveg"
+                                data-id="ginger-chicken"
+                                data-name="Ginger Chicken" data-price="120">
+                                <div class="menu-info">
+                                    <h3>Ginger Chicken</h3>
+                                    <p class="desc">Crispy chicken chunks
+                                        flavored with fragrant ginger <br>and
+                                        light spices.</p>
+                                    <span class="price">&#8377;120</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                </div>
+                            </div>
+
+                            <div class="menu-card nonveg"
+                                data-id="chicken-pakodi"
+                                data-name="Chicken Pakodi" data-price="90">
+                                <div class="menu-info">
+                                    <h3>Chicken pakodi</h3>
+                                    <p class="desc">Boneless chicken marinated
+                                        in spices, gram flour-coated and
+                                        deep-fried till crispy.</p>
+                                    <span class="price">&#8377;90</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <!-- big dael -->
+                    <section class="big-deal">
+                        <div class="container">
+                            <h1 class="section-heading text-pure">Big deal of
+                                the week</h1>
+                            <div class="timer">
+
+                                <div>
+                                    <span>02</span>
+                                    <span>days</span>
+                                </div>
+                                <div>
+                                    <span>24</span>
+                                    <span>hours</span>
+                                </div>
+                                <div>
+                                    <span>55</span>
+                                    <span>Minutes</span>
+                                </div>
+                                <div>
+                                    <span>58</span>
+                                    <span>seconds</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- menu section 2 -->
+
+                    <section id="dal" class="menu-section">
+
+                        <h2>Dal</h2>
+                        <!-- <p class="subtitle">Choose your favorite dishes</p> -->
+
+                        <!-- CATEGORY FILTER -->
+                        <!-- <div class="filter-btns">
+                            <button class="filter active"
+                                data-filter="all">All</button>
+                            <button class="filter"
+                                data-filter="veg">Veg</button>
+                            <button class="filter"
+                                data-filter="nonveg">Non-Veg</button>
+                        </div> -->
+
+                        <div class="menu-grid">
+
+                            <!-- ITEM -->
+                            <div class="menu-card veg" data-id="dal-fry"
+                                data-name="Dal Fry" data-price="80">
+                                <div class="menu-info">
+                                    <h3>Dal Fry</h3>
+                                    <p class="desc">Slow-cooked dal finished
+                                        with a fragrant tadka of ghee,<br>
+                                        garlic, and spices.</p>
+                                    <span class="price">&#8377;80</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877">
+                                </div>
+                            </div>
+
+                            <div class="menu-card veg" data-id="bangla-dal"
+                                data-name="Bangla Dal" data-price="90">
+                                <div class="menu-info">
+                                    <h3>Bangla Dal</h3>
+                                    <p class="desc">Gently spiced dal finished
+                                        with a classic Bengali <br>
+                                        tempering.</p>
+                                    <span class="price">&#8377;90</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                </div>
+                            </div>
+
+                            <div class="menu-card veg" data-id="mix-dal"
+                                data-name="Mix Dal" data-price="110">
+                                <div class="menu-info">
+                                    <h3>Mix Dal</h3>
+                                    <p class="desc">A flavorful combination of
+                                        lentils tempered with cumin, garlic,<br>
+                                        and aromatic spices.</p>
+                                    <span class="price">&#8377;110</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877">
+                                </div>
+                            </div>
+
+                            <div class="menu-card veg" data-id="dal-makhani"
+                                data-name="Dal Makhani" data-price="70">
+                                <div class="menu-info">
+                                    <h3>Dal Makhani</h3>
+                                    <p class="desc">Luxuriously creamy dal with
+                                        a perfect balance <br>of spices and
+                                        butter.</p>
+                                    <span class="price">&#8377;70</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1625944525903-b2b9e5d40f3a">
+                                </div>
+                            </div>
+
+                            <div class="menu-card veg" data-id="rajma"
+                                data-name="Rajma (Red Kidney Bean Curry)"
+                                data-price="80">
+                                <div class="menu-info">
+                                    <h3>Rajma (Red Kidney Bean Curry)</h3>
+                                    <p class="desc">Hearty kidney bean curry
+                                        with comforting,<br> well-balanced
+                                        spices.</p>
+                                    <span class="price">&#8377;80</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877">
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <!-- subscribe-section -->
+                    <section class="subscribe">
+                        <div class="container flex items-center">
+                            <div>
+                                <img src="../static/images/rasberry.png" alt>
+                            </div>
+                            <div>
+                                <h1>Subscribe to your newsletter</h1>
+                                <p>Subscribe to get exclusive offers,new menu
+                                    updates, and mouth-watering recipes.</p>
+                                <div class="input-wrap">
+                                    <input type="email"
+                                        placeholder="email@foodyguys.com">
+                                    <button>subscribe</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- footer -->
+                    <footer>
+                        <div class="container">
+                            <div class="box">
+                                <h3>about us</h3>
+                                <p>FoodieGuys brings you delicious food crafted
+                                    with passion. Fresh ingredients, modern
+                                    taste & love in every bite.</p>
+                                <button class="btn btn-secondary"> Read
+                                    More</button>
+                            </div>
+                            <div class="box">
+                                <h3>quick links</h3>
+                                <ul>
+                                    <li>
+                                        <a href="#">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">About</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Products</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Blog</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Services</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Gallery</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box">
+                                <h3>Follow Us</h3>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <img
+                                                    src="../static/icons/facebook.svg"
+                                                    alt>
+                                                <span>Facebook</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img
+                                                    src="../static/icons/twitter.svg"
+                                                    alt>
+                                                <span>Twitter</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img
+                                                    src="../static/icons/instagram.svg"
+                                                    alt>
+                                                <span>Instagram</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img
+                                                    src="../static/icons/google.svg"
+                                                    alt>
+                                                <span>Google</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div class="box instagram-api">
+                                <h3>Instagram</h3>
+                                <div class="post-wrap">
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </footer>
+                        <!--footer - 2  -->
+                        <footer class="copyright">
+                            <div>
+                                copyright &copy; 2025 <a
+                                    href="#">foodyguys.com</a> | All rights
+                                reserved
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+
+                <!-- CART OVERLAY -->
+
+                <div id="cartOverlay" class="cart-overlay"></div>
+
+                <!-- CART DRAWER -->
+                <div id="cartDrawer" class="cart-drawer">
+                    <div class="cart-header">
+                        <h2>Your Cart</h2>
+                        <span class="closecart" id="closeCart">&times;</span>
+                    </div>
+
+                    <div id="cartItems" class="cart-items"></div>
+
+                    <div class="cart-footer">
+                        <h3>Total: ₹<span id="cartTotal">0</span></h3>
+                        <button onclick="goToCheckout()" class="checkout-btn">
+    Checkout
+</button>
+<!-- <button onclick="goToCheckout()">Checkout</button> -->
+ <!-- <form action="/checkout" method="get" onsubmit="return validateCart()" onclick="goToCheckout()">
+    <button type="submit">Order Now</button>
+</form> -->
+
+
+                        <button class="whatsapp-btn"
+                            onclick="orderOnWhatsApp()">
+                            Order on WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Back To Top Button -->
+            <button id="backToTop" title="Go to top">⬆</button>
+
+            <script type="text/javascript"
+                src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+            <script type="text/javascript"
+                src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+            <script type="text/javascript"
+                src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+            <script src="../static/js/app.js"></script>
+
+            <script src="../static/js/cart.js"></script>
+            <script src="../static/js/menu.js"></script>
+            <script src="../static/js/backtotop.js" defer></script>
+            
+            <script>
+function goToCheckout(){
+    window.location.href = "/checkout";
+}
+</script>
+
+            
+
+
+<!-- <script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+if(cart.length === 0){
+    alert("Your cart is empty!");
+    window.location.href = "/menu";
+}
+</script> -->
+
+<script>
+function goToCheckout() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length === 0) {
+        alert("🛒 Cart empty!");
+        return;
+    }
+
+    fetch("/sync-cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cart)
+    }).then(() => {
+        window.location.href = "/checkout";
+    });
+}
+</script>
+
+
+
+
+
+        </body>
+
+    </html>

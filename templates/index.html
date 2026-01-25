@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=7">
+        <link rel="stylesheet" type="text/css"
+            href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+        <link rel="icon" href="../static/images/websiteicon.png"
+            type="image/x-icon">
+        <title>FoodieGuys</title>
+        <link rel="stylesheet" href="../static/css/backtotop.css">
+        <link rel="stylesheet" href="../static/css/style.css">
+        <link rel="stylesheet" href="../static/css/menu.css">
+        <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css'
+            rel='stylesheet'>
+
+    </head>
+
+    <body>
+        <div class="main-wrapper">
+            <div class="nav-background">
+                <div class="mobile-logo">
+                    <img src="../static/icons/logo.svg" alt>
+                </div>
+                <div class="mobile-nav">
+                    <div class="cart">
+                        <div class="flex items-center">
+                            <img src="../static/icons/cart-dark.svg" alt>
+                            <a href="{{ url_for('menu') }}" class="cart-count">0
+                                items</a>
+                        </div>
+                    </div>
+                    <div class="nav-top">
+                        <ul>
+                            <li>
+                                <a href="{{ url_for('home') }}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('about') }}">About us</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('menu') }}">Menu</a>
+                            </li>
+                            <!-- <li>
+                                <a href="#">Blog</a>
+                            </li> -->
+                            <!-- <li>
+                                <a href="#">Shop</a>
+                            </li> -->
+                            <li>
+                                <a href="#">Services</a>
+                            </li>
+                            <li>
+                                <a href="#">Contact us</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('logout') }}">Logout</a>
+                            </li>
+                            <li>
+                                <a href="#">Register Now</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contact flex items-center">
+                        <img src="../static/icons/phone.svg" alt>
+                        <div>
+                            <h5>Call Us : (+91) 00000-00000</h5>
+                            <h6>E-mail : foodyguys@gmail.com</h6>
+                        </div>
+                    </div>
+                    <div class="time flex items-center">
+                        <img src="../static/icons/clock.svg" alt>
+                        <div>
+                            <h5>Working hours</h5>
+                            <h6>Mon-sat (8:00am - 12:00am)</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="site-content-wrapper">
+                <div class="nav-trigger">
+                    <!-- <button id="menu-hamburger" aria-label="Toggle Menu"> -->
+                    <svg width="30" height="30" viewBox="0 0 30 30"
+                        fill="none" xmlns="www.w3.org">
+                        <path d="M4 8H26" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" />
+                        <path d="M4 15H26" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" />
+                        <path d="M4 22H26" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" />
+                    </svg>
+                    <!-- </button> -->
+                </div>
+                <div class="site-content">
+                    <header class="topbar">
+                        <div
+                            class="container flex justify-between items-center">
+                            <div class="icons">
+                                <a href="#"><img
+                                        src="../static/icons/facebook.svg"
+                                        alt></a>
+                                <a href="#"><img
+                                        src="../static/icons/twitter.svg"
+                                        alt></a>
+                                <a href="#"><img
+                                        src="../static/icons/google.svg"
+                                        alt></a>
+                                <a href="#"><img
+                                        src="../static/icons/instagram.svg"
+                                        alt></a>
+                                <a href="#"><img
+                                        src="../static/icons/search.svg"
+                                        alt></a>
+                            </div>
+                            <div class="auth flex items-center">
+
+                                <div>
+                                    <img src="../static/icons/user-icon.svg"
+                                        alt>
+                                    <a href="{{ url_for('logout') }}">Logout</a>
+
+                                </div>
+                                <span class="divider">|</span>
+                                <div>
+                                    <img src="../static/icons/edit.svg" alt>
+                                    <a href="#">register now</a>
+                                </div>
+                                <span class="divider">|</span>
+                                <div>
+                                    <img src="../static/icons/cart.svg" alt>
+                                    <a href="{{ url_for('menu') }}"
+                                        class="cart-count">0 items</a>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <nav>
+                        <div class="top">
+                            <div class="container flex justify-between">
+                                <div class="contact flex items-center">
+                                    <img src="../static/icons/phone.svg" alt>
+                                    <div>
+                                        <h5>call us : (+91) 00000-00000</h5>
+                                        <h6>E-mail : foodyguys@gmail.com</h6>
+                                    </div>
+                                </div>
+                                <div class="branding">
+                                    <img src="../static/icons/logo.svg" alt>
+                                </div>
+                                <div class="time flex items-center">
+                                    <img src="../static/icons/clock.svg" alt>
+                                    <div>
+                                        <h5>working time</h5>
+                                        <h6>mon-sat (8:00am - 11:00pm)</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navbar magic-shadow">
+                            <div class="container flex justify-center">
+                                <a href="{{ url_for('home') }}"
+                                    class="active">Home</a>
+                                <a href="{{ url_for('about') }}">About</a>
+                                <a href="{{ url_for('menu') }}">Menu</a>
+                                <!-- <a href="#">Blog</a> -->
+                                <a href="#">Services</a>
+                                <!-- <a href="#">gallery</a> -->
+                                <a href="#">contact</a>
+                            </div>
+                        </div>
+                    </nav>
+                    <header class="hero flex items-center">
+                        <div class="container">
+                            <div class="wellcome flex items-center">
+                                <span>Wellcome to</span>
+                                <img src="../static/icons/logo.svg" alt>
+                            </div>
+                            <h1>The world best <span>shoping</span> Website</h1>
+                            <p>Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit.
+                                Hic, porro accusamus! In porro, autem facilis
+                                alias ipsa
+                                fuga a eius mollitia eum.
+                                Porro dolorem repellat necessitatibus.
+                                Veniam vel repellat maxime!</p>
+                            <div>
+                                <button class="btn btn-primary">Read
+                                    more</button>
+                                <button class="btn btn-secondary">Shop
+                                    Now</button>
+                            </div>
+                            <div class="hero-image">
+                                <img src="../static/images/straw.png" alt>
+                            </div>
+                        </div>
+                    </header>
+
+                    <section class="top-products">
+                        <div class="container">
+                            <h1 class="section-heading">Top Products</h1>
+                            <div class="slider">
+                                <button class="slider-btn prev-btn"><img
+                                        src="../static/icons/arrow-left-circle.svg"
+                                        alt></button>
+                                <button class="slider-btn next-btn"><img
+                                        src="../static/icons/arrow-right-circle.svg"
+                                        alt></button>
+                                <div class="food-slider">
+                                    <div class="food-card magic-shadow-sm">
+                                        <div
+                                            class="product-image flex items-center justify-center">
+                                            <img
+                                                src="../static/images/plate-1.png"
+                                                alt>
+                                        </div>
+                                        <hr>
+                                        <div>
+                                            <h2 class="text-center">Summer
+                                                Salad</h2>
+                                            <div
+                                                class="stars flex justify-center items-center">
+                                                <img
+                                                    src="../static/icons/start-filled.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/start-filled.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/start-filled.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/star-grey.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/star-grey.svg"
+                                                    alt>
+                                            </div>
+                                            <div class="price text-center">
+                                                $1.50
+                                            </div>
+                                            <div class="flex justify-center">
+                                                <button>
+                                                    <img
+                                                        src="../static/icons/cart-2.svg"
+                                                        alt>
+                                                    <span>Add to Cart</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="food-card magic-shadow-sm">
+                                        <div
+                                            class="product-image flex items-center justify-center">
+                                            <img
+                                                src="../static/images/plate-2.png"
+                                                alt>
+                                        </div>
+                                        <hr>
+                                        <div>
+                                            <h2 class="text-center">russian
+                                                Salad</h2>
+                                            <div
+                                                class="stars flex justify-center items-center">
+                                                <img
+                                                    src="../static/icons/start-filled.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/start-filled.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/start-filled.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/star-grey.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/star-grey.svg"
+                                                    alt>
+                                            </div>
+                                            <div class="price text-center">
+                                                $1.50
+                                            </div>
+                                            <div class="flex justify-center">
+                                                <button>
+                                                    <img
+                                                        src="../static/icons/cart-2.svg"
+                                                        alt>
+                                                    <span>Add to Cart</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="food-card magic-shadow-sm">
+                                        <div
+                                            class="product-image flex items-center justify-center">
+                                            <img
+                                                src="../static/images/plate-2.png"
+                                                alt>
+                                        </div>
+                                        <hr>
+                                        <div>
+                                            <h2 class="text-center">greek
+                                                Salad</h2>
+                                            <div
+                                                class="stars flex justify-center items-center">
+                                                <img
+                                                    src="../static/icons/start-filled.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/start-filled.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/start-filled.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/star-grey.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/star-grey.svg"
+                                                    alt>
+                                            </div>
+                                            <div class="price text-center">
+                                                $1.50
+                                            </div>
+                                            <div class="flex justify-center">
+                                                <button>
+                                                    <img
+                                                        src="../static/icons/cart-2.svg"
+                                                        alt>
+                                                    <span>Add to Cart</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="food-card magic-shadow-sm">
+                                        <div
+                                            class="product-image flex items-center justify-center">
+                                            <img
+                                                src="../static/images/plate-1.png"
+                                                alt>
+                                        </div>
+                                        <hr>
+                                        <div>
+                                            <h2 class="text-center">cottage
+                                                pie</h2>
+                                            <div
+                                                class="stars flex justify-center items-center">
+                                                <img
+                                                    src="../static/icons/start-filled.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/start-filled.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/start-filled.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/star-grey.svg"
+                                                    alt>
+                                                <img
+                                                    src="../static/icons/star-grey.svg"
+                                                    alt>
+                                            </div>
+                                            <div class="price text-center">
+                                                $1.50
+                                            </div>
+                                            <div class="flex justify-center">
+                                                <button>
+                                                    <img
+                                                        src="../static/icons/cart-2.svg"
+                                                        alt>
+                                                    <span>Add to Cart</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center btn-wrapper">
+                                <button class="btn btn-secondary">view
+                                    more</button>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- adouth meal  -->
+                    <section class="about-meal">
+                        <div class="container">
+                            <h1 class="section-heading">
+                                About Our Meal
+                            </h1>
+                            <div class="about-meal-wrap flex">
+                                <div class="flex-1">
+                                    <img src="../static/images/yogurt.png" alt>
+                                </div>
+                                <div class="flex-1">
+                                    <h2>Fresh meal is a long estableished fast
+                                        that a reader
+                                        will be distracted</h2>
+                                    <p>Lorem ipsum dolor sit amet consectetur
+                                        adipisicing
+                                        elit.
+                                        A pariatur non totam rerum neque
+                                        necessitatibus
+                                        placeat omnis,
+                                        vitae est, amet ad voluptatibus ratione
+                                        quae quod
+                                        qui ipsa,
+                                        suscipit sunt? Obcaecati?</p>
+                                    <button class="btn btn-secondary">Read
+                                        more</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- services -->
+                    <section class="our-services">
+                        <div class="container">
+                            <h1 class="section-heading">Our services</h1>
+                            <div class="card-wrapper flex">
+                                <div class="service-card magic-shadow-sm">
+                                    <img class="icon"
+                                        src="../static/icons/transport.svg" alt>
+                                    <h2>Free home delivery</h2>
+                                    <p>Lorem ipsum dolor sit amet consectetur
+                                        adipisicing
+                                        elit.
+                                        Reprehenderit beatae necessitatibus id
+                                        eos nobis
+                                        itaque
+                                        unde saepe excepturi nemo delectus, est
+                                        nesciunt
+                                        ipsa,
+                                        tenetur a maiores eveniet? Eos, quisquam
+                                        voluptas!</p>
+                                    <button class="btn btn-secondary">Read
+                                        More</button>
+                                </div>
+                                <div class="service-card magic-shadow-sm">
+                                    <img class="icon"
+                                        src="../static/icons/bag.svg" alt>
+                                    <h2 class="text-primary">30 days
+                                        ReturnServices</h2>
+                                    <p>Lorem ipsum dolor sit amet consectetur
+                                        adipisicing
+                                        elit.
+                                        Reprehenderit beatae necessitatibus id
+                                        eos nobis
+                                        itaque
+                                        unde saepe excepturi nemo delectus, est
+                                        nesciunt
+                                        ipsa,
+                                        tenetur a maiores eveniet? Eos, quisquam
+                                        voluptas!</p>
+                                    <button class="btn btn-primary">Read
+                                        More</button>
+                                </div>
+                                <div class="service-card magic-shadow-sm">
+                                    <img class="icon"
+                                        src="../static/icons/usd.svg" alt>
+                                    <h2>Mony back Guaranted</h2>
+                                    <p>Lorem ipsum dolor sit amet consectetur
+                                        adipisicing
+                                        elit.
+                                        Reprehenderit beatae necessitatibus id
+                                        eos nobis
+                                        itaque
+                                        unde saepe excepturi nemo delectus, est
+                                        nesciunt
+                                        ipsa,
+                                        tenetur a maiores eveniet? Eos, quisquam
+                                        voluptas!</p>
+                                    <button class="btn btn-secondary">Read
+                                        More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- big dael -->
+                    <section class="big-deal">
+                        <div class="container">
+                            <h1 class="section-heading text-pure">Big deal of
+                                the week</h1>
+                            <div class="timer">
+
+                                <div>
+                                    <span>02</span>
+                                    <span>days</span>
+                                </div>
+                                <div>
+                                    <span>24</span>
+                                    <span>hours</span>
+                                </div>
+                                <div>
+                                    <span>55</span>
+                                    <span>Minutes</span>
+                                </div>
+                                <div>
+                                    <span>58</span>
+                                    <span>seconds</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="latest-news">
+                        <div class="container">
+                            <h1 class="section-heading">latest news from
+                                blog</h1>
+                            <div class="article-wrapper">
+                                <article class="card magic-shadow-sm">
+                                    <div>
+                                        <img src="../static/images/donut.jpg"
+                                            alt>
+                                    </div>
+                                    <div class="card-content">
+                                        <div
+                                            class="post-meta flex items-center justify-between">
+                                            <span>Des 03, 2025</span>
+                                            <div>
+                                                <span>posted by
+                                                    <strong>frestedMeal</strong></span>
+                                                <span class="comment-count">12
+                                                    Comments</span>
+                                            </div>
+                                        </div>
+
+                                        <h2>Lorem ipsum dolor sit amet
+                                            consectetur
+                                            adipisicing elit</h2>
+                                        <p>
+                                            Lorem ipsum dolor sit, amet
+                                            consectetur
+                                            adipisicing elit. Iure aliquam
+                                            labore id quod!
+                                            Excepturi saepe necessitatibus
+                                            doloremque
+                                            sapiente veritatis corporis odit
+                                            voluptates!
+                                        </p>
+
+                                    </div>
+                                </article>
+
+                                <article class="card magic-shadow-sm">
+                                    <div>
+                                        <img src="../static/images/coffee.jpg"
+                                            alt>
+                                    </div>
+                                    <div class="card-content">
+                                        <div
+                                            class="post-meta flex items-center justify-between">
+                                            <span>Des 03, 2025</span>
+                                            <div>
+                                                <span>posted by
+                                                    <strong>frestedMeal</strong></span>
+                                                <span class="comment-count">12
+                                                    Comments</span>
+                                            </div>
+                                        </div>
+
+                                        <h2>Lorem ipsum dolor sit amet
+                                            consectetur
+                                            adipisicing elit</h2>
+                                        <p>
+                                            Lorem ipsum dolor sit, amet
+                                            consectetur
+                                            adipisicing elit. Iure aliquam
+                                            labore id quod!
+                                            Excepturi saepe necessitatibus
+                                            doloremque
+                                            sapiente veritatis corporis odit
+                                            voluptates!
+                                        </p>
+
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="text-center btn-wrapper">
+                                <button class="btn btn-secondary">view
+                                    all</button>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- subscribe-section -->
+                    <section class="subscribe">
+                        <div class="container flex items-center">
+                            <div>
+                                <img src="../static/images/rasberry.png" alt>
+                            </div>
+                            <div>
+                                <h1>Subscribe to your newsletter</h1>
+                                <p>Lorem, ipsum dolor sit amet consectetur
+                                    adipisicing elit.
+                                    Iste, debitis dicta.</p>
+                                <div class="input-wrap">
+                                    <input type="email"
+                                        placeholder="email@foodyguys.com">
+                                    <button>subscribe</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--contact-us -map  -->
+                    <section class="contact-us flex">
+                        <div class="contact-info-wrapper">
+                            <h1 class="section-heading">contact-us</h1>
+                            <div class="contact-info">
+                                <div>
+                                    <div>
+                                        <img src="../static/icons/phone-2.svg"
+                                            alt>
+                                        <div>
+                                            <span> Call us</span>
+                                            <span>(+91) 00000-00000</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <img src="../static/icons/email.svg"
+                                            alt>
+                                        <div>
+                                            <span>E-mail ::</span>
+                                            <span>support@gmail.com</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <img src="../static/icons/clock-2.svg"
+                                            alt>
+                                        <div>
+                                            <span>working hours</span>
+                                            <span>(+91) 00000-00000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3694.2690768452526!2d78.74805487474624!3d22.191878246817712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd57dd79d5e1f23%3A0x3218902ff2550fdf!2sHotel%20Poonam%20Plaza!5e0!3m2!1sen!2sin!4v1764928778188!5m2!1sen!2sin"
+                                width="100%" height="100%" style="border:0;"
+                                allowfullscreen
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </section>
+                    <!-- footer -->
+                    <footer>
+                        <div class="container">
+                            <div class="box">
+                                <h3>about us</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur
+                                    adipisicing elit.
+                                    Molestiae beatae reiciendis eveniet qui
+                                    sapiente sit
+                                    debitis</p>
+                                <button class="btn btn-secondary"> Read
+                                    More</button>
+                            </div>
+                            <div class="box">
+                                <h3>quick links</h3>
+                                <ul>
+                                    <li>
+                                        <a href="{{ url_for('home') }}">Home</a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="{{ url_for('about') }}">About</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('menu') }}">Menu</a>
+                                    </li>
+                                    <!-- <li>
+                                        <a href="#">Blog</a>
+                                    </li> -->
+                                    <!-- <li>
+                                        <a href="#">Services</a>
+                                    </li> -->
+                                    <!-- <li>
+                                        <a href="#">Gallery</a>
+                                    </li> -->
+                                    <li>
+                                        <a href="#">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box">
+                                <h3>Follow Us</h3>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <img
+                                                    src="../static/icons/facebook.svg"
+                                                    alt>
+                                                <span>Facebook</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img
+                                                    src="../static/icons/twitter.svg"
+                                                    alt>
+                                                <span>Twitter</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img
+                                                    src="../static/icons/instagram.svg"
+                                                    alt>
+                                                <span>Instagram</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img
+                                                    src="../static/icons/google.svg"
+                                                    alt>
+                                                <span>Google</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div class="box instagram-api">
+                                <h3>Instagram</h3>
+                                <div class="post-wrap">
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </footer>
+                        <!--footer - 2  -->
+                        <footer class="copyright">
+                            <div>
+                                copyright &copy; 2025 <a
+                                    href="#">foodyguys.com</a> | All rights
+                                reserved
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back To Top Button -->
+            <button id="backToTop" title="Go to top">⬆</button>
+
+            <script type="text/javascript"
+                src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+            <script type="text/javascript"
+                src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+            <script type="text/javascript"
+                src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+            <script src="../static/js/app.js"></script>
+            <script src="../static/js/cart.js"></script>
+            <script src="../static/js/menu.js"></script>
+            <script src="../static/js/backtotop.js"></script>
+            <!-- <script src="../static/js/script.js"></script> -->
+        </body>
+
+    </html>

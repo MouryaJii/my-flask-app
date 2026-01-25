@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Checkout</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ---------- BASE ---------- */
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #f8fafc, #eef2f7);
+    margin: 0;
+    padding: 0;
+    color: #1f2937;
+}
+
+/* ---------- CONTAINER ---------- */
+.container{
+    max-width: 920px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 18px;
+    box-shadow: 
+        0 20px 40px rgba(0,0,0,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* ---------- HEADINGS ---------- */
+h2{
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: #111827;
+    letter-spacing: -0.5px;
+}
+
+h3{
+    margin-top: 34px;
+    margin-bottom: 14px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #374151;
+    padding-left: 14px;
+    border-left: 4px solid #ff5a5f;
+}
+
+/* ---------- INPUTS ---------- */
+input, select{
+    width: 100%;
+    padding: 14px 15px;
+    margin: 10px 0;
+    font-size: 15px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    background: #f9fafb;
+    transition: all 0.25s ease;
+}
+
+input::placeholder{
+    color: #9ca3af;
+}
+
+input:focus, select:focus{
+    border-color: #ff5a5f;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(255,90,95,0.15);
+    outline: none;
+}
+
+/* ---------- CART ITEMS ---------- */
+.cart-item{
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px dashed #5e6677;
+    font-size: 15px;
+}
+
+.cart-item span:nth-child(1){
+    font-weight: 600;
+    color: #111827;
+}
+
+.cart-item span:nth-child(2){
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.cart-item span:nth-child(3){
+    font-weight: 700;
+    color: #111827;
+}
+
+.cart-item span:first-child{
+    color: #959497;
+}
+.cart-item p span:first-child{
+    color: #32f900;
+}
+
+.cart-item span:last-child{
+    font-weight: 600;
+}
+
+
+/* ---------- TOTAL ---------- */
+hr{
+    margin: 28px 0;
+    border: none;
+    border-top: 1px solid #e5e7eb;
+}
+
+h3:last-of-type{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* ---------- BUTTON ---------- */
+button{
+    width: 100%;
+    margin-top: 32px;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(135deg, #ff5a5f, #ff7a18);
+    box-shadow: 0 14px 28px rgba(255,90,95,0.35);
+    transition: all 0.2s ease;
+}
+
+button:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 20px 36px rgba(255,90,95,0.45);
+}
+
+button:active{
+    transform: scale(0.97);
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+/* Tablets */
+@media (max-width: 900px){
+    .container{
+        margin: 30px 20px;
+        padding: 26px;
+    }
+
+    h2{
+        font-size: 26px;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 600px){
+    .cart-item{
+        grid-template-columns: 1.6fr 1fr auto;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .cart-item span:nth-child(1){
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .cart-item span:nth-child(2){
+        font-size: 13px;
+        text-align: center;
+        color: #6b7280;
+    }
+
+    .cart-item span:nth-child(3){
+        font-size: 14px;
+        font-weight: 700;
+        text-align: right;
+    }
+    
+}
+
+
+/* Very small devices */
+@media (max-width: 360px){
+    h2{
+        font-size: 22px;
+    }
+
+    button{
+        font-size: 16px;
+        padding: 14px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Checkout</h2>
+
+<form method="POST" action="/create-order">
+
+<!-- USER DETAILS -->
+<h3>User Details</h3>
+<input name="name" placeholder="Full Name" required>
+<input name="email" placeholder="Email" required>
+<input name="phone" placeholder="Phone" required>
+
+<!-- ADDRESS -->
+<h3>Delivery Address</h3>
+<input name="house" placeholder="House / Flat / Building" required>
+<input name="street" placeholder="Area / Street" required>
+<input name="landmark" placeholder="Landmark (Optional)">
+<input name="city" placeholder="City" required>
+<input name="pincode" placeholder="Pincode" required>
+
+<select name="address_type" required>
+    <option value="">Address Type</option>
+    <option value="Home">Home</option>
+    <option value="Work">Work</option>
+</select>
+
+<!-- CART -->
+<h3>Cart Items</h3>
+
+{% for item in cart %}
+    <div class="cart-item">
+    <span>{{ item.name }}</span>
+        <span> ({{ item.qty }} × ₹{{ item.price }})</span>
+    <span>₹{{ item.price * item.qty }}</span>
+   
+</div>
+{% endfor %}
+<div class="cart-item">
+    <p><span>Delivery Fee</span></p>
+    <span></span>
+    <p><span>₹{{ delivery_fee }}</span></p>
+</div>
+<hr>
+<h3>Total:<space></space> ₹{{ total }}</h3>
+<!-- <div id="cartItems"></div> -->
+<!-- <h3>Total: <span id="total">₹0</span></h3> -->
+
+
+<button type="submit">Order Now</button>
+
+</form>
+
+</div>
+
+
+</body>
+</html>

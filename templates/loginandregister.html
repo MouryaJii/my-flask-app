@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>foodygus login and register page</title>
+    <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../static/css/loginregister.css">
+</head>
+
+<body>
+
+<!-- for flash messages -->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-container">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+
+
+<div class="container">
+    <div class="form-box login">
+        <form action="{{ url_for('login') }}" method="post">
+            <h1>login</h1>
+            <div class="input-box">
+                <input type="text" name="username" placeholder="Username" required>
+                <i class='bx  bxs-user'></i> 
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" placeholder="Password" required>
+                <i class='bx  bxs-lock'></i> 
+            </div>
+            <div class="forgot-link">
+                <a href="#">Forgot Password</a>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <p>or login with social platforms</p>
+            <div class="soocial-icons">
+                <a href="#"><i class='bxl bx-google'></i> </a>
+                <a href="#"><i class='bxl bx-facebook'></i> </a>
+                <a href="#"><i class='bxl bx-github'></i> </a>
+                <a href="#"><i class='bxl bx-linkedin'></i>  </a>
+            </div>
+        </form>
+    </div>
+
+    <div class="form-box register">
+        <form action="{{ url_for('register') }}" method="post">
+            <h1>registration</h1>
+            <div class="input-box">
+                <input type="text" name="username" placeholder="Username" required>
+                <i class='bx  bxs-user'></i> 
+            </div>
+            <div class="input-box">
+                <input type="email" name="email" placeholder="E-mail" required>
+                <i class='bx  bxs-envelope'></i>  
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" placeholder="Password" required>
+                <i class='bx  bxs-lock'></i> 
+            </div>
+            <button type="submit" class="btn">Register</button>
+            <p>or Register with social platforms</p>
+            <div class="soocial-icons">
+                <a href="#"><i class='bxl bx-google'></i> </a>
+                <a href="#"><i class='bxl bx-facebook'></i> </a>
+                <a href="#"><i class='bxl bx-github'></i> </a>
+                <a href="#"><i class='bxl bx-linkedin'></i>  </a>
+            </div>
+        </form>
+    </div>
+
+    <div class="toggle-box">
+        <div class="toggle-panel toggle-left">
+            <h1>Hello, Wellcome</h1>
+            <p>Don't have an account?</p>
+            <button class="btn register-btn">Register</button>
+        </div>
+        <div class="toggle-panel toggle-right">
+            <h1>Wellcome Back!</h1>
+            <p>Don't have an account?</p>
+            <button class="btn login-btn">Login</button>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="../static/js/script.js"></script>
+</body>
+
+</html>

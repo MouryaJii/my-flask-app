@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Payment</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<style>
+/* ====== BACKGROUND ====== */
+body {
+  background: linear-gradient(135deg, #fff1eb, #ace0f9);
+}
+
+/* ====== MAIN CONTAINER ====== */
+.checkout-wrapper {
+  display: flex;
+  gap: 22px;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 22px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: transparent;
+}
+
+/* ====== LEFT : TERMS ====== */
+.order-box {
+  flex: 2;
+  background: linear-gradient(180deg, #ffffff, #fff7f0);
+  border-radius: 14px;
+  padding: 22px;
+  height: 520px;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.order-box h3 {
+  margin-top: 0;
+  color: #ff6f00;
+  font-size: 20px;
+}
+
+.term-block {
+  background: #fff;
+  border-left: 5px solid #ff6f00;
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.term-block h4 {
+  margin: 0 0 6px;
+  font-size: 15px;
+  color: #333;
+}
+
+.term-block p {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ====== RIGHT : PAYMENT ====== */
+.payment-box {
+  flex: 1;
+  background: linear-gradient(180deg, #ffffff, #f0fff4);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.payment-logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ff3d00;
+}
+
+.payment-title {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 22px;
+}
+
+/* Amount rows */
+.amount-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #333;
+}
+
+.amount-row.total {
+  font-size: 17px;
+  font-weight: bold;
+  border-top: 2px dashed #ff9800;
+  padding-top: 12px;
+  color: #000;
+}
+
+/* Acceptance */
+.accept-box {
+  margin: 20px 0;
+  font-size: 13px;
+  background: #fff3e0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Pay Button */
+.pay-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(255,75,43,0.4);
+}
+
+.pay-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(255,75,43,0.6);
+}
+
+/* ====== SCROLL BAR ====== */
+.order-box::-webkit-scrollbar {
+  width: 6px;
+}
+.order-box::-webkit-scrollbar-thumb {
+  background: #ff9800;
+  border-radius: 10px;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .checkout-wrapper {
+    flex-direction: column;
+  }
+  .order-box {
+    height: auto;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="checkout-wrapper">
+
+  <!-- LEFT SIDE -->
+  <div class="order-box">
+    <h3>FoodieGuys Terms & Conditions</h3>
+
+    <div class="term-block">
+      <h4>Order Confirmation</h4>
+      <p>An order is considered confirmed only after successful payment or selection of payment method and order placement.</p>
+    </div>
+
+    <div class="term-block">
+      <h4>Payment Policy</h4>
+      <p>Online payments are processed via a secure payment gateway. Failed transactions will be refunded within 5–7 working days.</p>
+    </div>
+
+    <div class="term-block">
+      <h4>Delivery Policy</h4>
+      <p>Delivery times are approximate and may vary due to traffic, weather, or unforeseen circumstances.
+
+Orders may be cancelled if the delivery address is incorrect or the customer is unavailable.</p>
+    </div>
+
+    <div class="term-block">
+      <h4>Order Cancellation</h4>
+      <p>Orders can be cancelled only if food preparation has not started.
+
+Once food preparation begins, cancellation requests will not be accepted.</p>
+    </div>
+
+    <div class="term-block">
+      <h4>Food Quality & Allergies</h4>
+      <p>Customers are advised to check ingredients and allergy information before placing an order.
+
+The company shall not be responsible for any allergic reactions.</p>
+    </div>
+
+    <div class="term-block">
+      <h4>User Responsibility</h4>
+      <p>Customers must provide accurate contact details and delivery address.
+
+The company is not responsible for delays or cancellations caused by incorrect information.</p>
+    </div>
+    <div class="term-block">
+      <h4>✅ Acceptance of Terms</h4>
+      <p>By placing an order, you confirm that you have read, understood, and agreed to these Terms & Conditions.</p>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="payment-box">
+
+    <div class="payment-logo">FoodieGuys</div>
+    <div class="payment-title">Complete Payment Securely</div>
+
+    <div class="amount-row">
+      <span>Order Amount</span>
+      <span>₹{{ amount }}</span>
+    </div>
+
+    <div class="amount-row total">
+      <span>Total Payable</span>
+      <span>₹{{ amount }}</span>
+    </div>
+
+    <div class="accept-box">
+      <label>
+        <input type="radio" name="paymethod" checked>
+        I agree to the Terms & Conditions
+      </label>
+    </div>
+
+    <button class="pay-btn" id="payBtn">
+      Pay ₹{{ amount }}
+    </button>
+
+  </div>
+
+</div>
+
+<script>
+var options = {
+    "key": "{{ razorpay_key }}",
+    "amount": "{{ amount * 100 }}",
+    "currency": "INR",
+    "name": "FoodieGuys",
+    "description": "Food Order Payment",
+    "order_id": "{{ order_id }}",
+    "handler": function (response) {
+
+        fetch("/payment-success", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(response)
+        })
+        .then(() => {
+            window.location.href = "/order-success";
+        });
+    },
+    "theme": {
+        "color": "#ff5a5f"
+    }
+};
+
+document.getElementById("payBtn").onclick = function(){
+    var rzp = new Razorpay(options);
+    rzp.open();
+};
+</script>
+
+</body>
+</html>
