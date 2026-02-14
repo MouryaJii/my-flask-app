@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Table Booking</title>
+
+<style>
+*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{
+    margin:0;
+    background:linear-gradient(135deg,#ff7a18,#ffb347);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+.card{
+    background:#fff;
+    width:100%;
+    max-width:520px;
+    border-radius:14px;
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+    padding:25px;
+}
+h2{text-align:center;margin-bottom:5px}
+.step{
+    display:none;
+}
+.step.active{
+    display:block;
+}
+label{
+    font-weight:600;
+    margin:10px 0 5px;
+    display:block;
+}
+input,select,textarea{
+    width:100%;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    outline:none;
+}
+input:focus,select:focus,textarea:focus{
+    border-color:#ff7a18;
+}
+.row{
+    display:flex;
+    gap:10px;
+}
+.btn{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:#ff7a18;
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+.btn.secondary{
+    background:#ccc;
+    color:#000;
+}
+.info{
+    background:#fff3e6;
+    padding:10px;
+    border-radius:6px;
+    margin-top:10px;
+    font-size:14px;
+}
+.success{
+    text-align:center;
+}
+.success h3{color:green}
+.badge{
+    background:#ff7a18;
+    color:#fff;
+    padding:6px 10px;
+    border-radius:20px;
+    display:inline-block;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>🍽️ Table Booking</h2>
+<p style="text-align:center;color:#666">Reserve your perfect table</p>
+
+<!-- STEP 1 -->
+<div class="step active" id="step1">
+    <label>Date</label>
+    <input type="date" id="date">
+
+    <label>Time</label>
+    <select id="time">
+        <option value="">Select Time</option>
+        <option>12:00 PM</option>
+        <option>1:00 PM</option>
+        <option>2:00 PM</option>
+        <option>7:00 PM</option>
+        <option>8:00 PM</option>
+        <option>9:00 PM</option>
+    </select>
+
+    <div class="info">🕒 Restaurant Open: 12 PM – 10 PM</div>
+
+    <button class="btn" onclick="nextStep(1)">Next</button>
+</div>
+
+<!-- STEP 2 -->
+<div class="step" id="step2">
+    <label>Number of Guests</label>
+    <select id="guests" onchange="suggestTable()">
+        <option value="">Select Guests</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="6">6</option>
+        <option value="8">8+</option>
+    </select>
+
+    <label>Suggested Table</label>
+    <input type="text" id="tableType" readonly>
+
+    <button class="btn secondary" onclick="prevStep(2)">Back</button>
+    <button class="btn" onclick="nextStep(2)">Next</button>
+</div>
+
+<!-- STEP 3 -->
+<div class="step" id="step3">
+    <label>Full Name</label>
+    <input type="text" id="name">
+
+    <label>Mobile Number</label>
+    <input type="tel" id="mobile">
+
+    <label>Special Request</label>
+    <textarea placeholder="Birthday, anniversary, window seat..."></textarea>
+
+    <button class="btn secondary" onclick="prevStep(3)">Back</button>
+    <button class="btn" onclick="confirmBooking()">Confirm Booking</button>
+</div>
+
+<!-- SUCCESS -->
+<div class="step success" id="step4">
+    <h3>🎉 Booking Confirmed!</h3>
+    <p>Your table has been successfully reserved.</p>
+    <div class="badge">Booking ID: <span id="bid"></span></div>
+    <p style="margin-top:15px;color:#555">📲 Confirmation will be sent on WhatsApp</p>
+</div>
+
+</div>
+
+<script>
+const today = new Date().toISOString().split("T")[0];
+document.getElementById("date").min = today;
+
+function nextStep(n){
+    if(n===1){
+        if(!date.value || !time.value){
+            alert("Please select date & time");
+            return;
+        }
+    }
+    if(n===2){
+        if(!guests.value){
+            alert("Please select guests");
+            return;
+        }
+    }
+    document.getElementById("step"+n).classList.remove("active");
+    document.getElementById("step"+(n+1)).classList.add("active");
+}
+
+function prevStep(n){
+    document.getElementById("step"+n).classList.remove("active");
+    document.getElementById("step"+(n-1)).classList.add("active");
+}
+
+function suggestTable(){
+    let g = guests.value;
+    let t = "Standard Table";
+    if(g<=2) t="2-Seater (Couple)";
+    else if(g<=4) t="4-Seater (Family)";
+    else if(g<=6) t="6-Seater (Group)";
+    else t="Party Table";
+    tableType.value = t;
+}
+
+function confirmBooking(){
+    if(!name.value || !mobile.value){
+        alert("Please fill your details");
+        return;
+    }
+    document.getElementById("step3").classList.remove("active");
+    document.getElementById("step4").classList.add("active");
+    document.getElementById("bid").innerText =
+        "TB" + Math.floor(100000 + Math.random()*900000);
+}
+</script>
+
+</body>
+</html>

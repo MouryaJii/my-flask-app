@@ -1,92 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Checkout</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=7">
+        <link rel="stylesheet" type="text/css"
+            href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+        <link rel="icon" href="../static/images/websiteicon.png"
+            type="image/x-icon">
+        <title>Fresh Meal | Checkout</title>
+        <link rel="stylesheet" href="../static/css/backtotop.css">
+        <link rel="stylesheet" href="../static/css/style.css">
+        <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css'
+            rel='stylesheet'>
+
+
+
+            <style>
 /* ---------- BASE ---------- */
-*{
-    box-sizing: border-box;
+* {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
-
 body{
     font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    background: linear-gradient(135deg, #f8fafc, #eef2f7);
+    background: linear-gradient(135deg, #f5f3ff, #fff7ed);
     margin: 0;
     padding: 0;
     color: #1f2937;
 }
 
 /* ---------- CONTAINER ---------- */
-.container{
+.container5{
     max-width: 920px;
     margin: 40px auto;
     background: #ffffff;
-    padding: 32px;
-    border-radius: 18px;
+    padding: 34px;
+    border-radius: 22px;
     box-shadow: 
-        0 20px 40px rgba(0,0,0,0.08),
-        inset 0 1px 0 rgba(255,255,255,0.6);
+        0 25px 50px rgba(109,40,217,0.15);
+        isolation: isolate;
 }
 
 /* ---------- HEADINGS ---------- */
 h2{
-    font-size: 30px;
-    font-weight: 700;
-    margin-bottom: 28px;
-    color: #111827;
-    letter-spacing: -0.5px;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    color: #6d28d9;
+    text-align: center;
+    letter-spacing: -0.6px;
 }
 
 h3{
-    margin-top: 34px;
-    margin-bottom: 14px;
+    margin-top: 36px;
+    margin-bottom: 16px;
     font-size: 18px;
-    font-weight: 600;
-    color: #374151;
+    font-weight: 700;
+    color: #4c1d95;
     padding-left: 14px;
-    border-left: 4px solid #ff5a5f;
+    border-left: 5px solid #facc15;
 }
 
 /* ---------- INPUTS ---------- */
 input, select{
     width: 100%;
-    padding: 14px 15px;
+    padding: 15px 16px;
     margin: 10px 0;
     font-size: 15px;
-    border-radius: 10px;
-    border: 1px solid #d1d5db;
-    background: #f9fafb;
+    border-radius: 12px;
+    border: 1.5px solid #ddd6fe;
+    background: #fafafa;
     transition: all 0.25s ease;
 }
+
+/* ---------- SELECT FIX ---------- */
+select{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fafafa;
+    background-image:
+        linear-gradient(45deg, transparent 50%, #6d28d9 50%),
+        linear-gradient(135deg, #6d28d9 50%, transparent 50%);
+    background-position:
+        calc(100% - 20px) 50%,
+        calc(100% - 14px) 50%;
+    background-size: 6px 6px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+
+    /* 👇 IMPORTANT */
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+select:hover{
+    background-color: #ffffff;
+    border-color: #a78bfa;
+}
+
+select:focus{
+    border-color: #6d28d9;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(109,40,217,0.18);
+    outline: none;
+}
+
+
 
 input::placeholder{
     color: #9ca3af;
 }
 
-input:focus, select:focus{
-    border-color: #ff5a5f;
+input:focus{
+    border-color: #6d28d9;
     background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(255,90,95,0.15);
+    box-shadow: 0 0 0 4px rgba(109,40,217,0.15);
     outline: none;
 }
+
 
 /* ---------- CART ITEMS ---------- */
 .cart-item{
     display: grid;
-    grid-template-columns: 1fr auto auto;
-    gap: 12px;
+    grid-template-columns: 1.4fr 1fr auto;
+    gap: 10px;
     align-items: center;
     padding: 14px 0;
-    border-bottom: 1px dashed #5e6677;
+    border-bottom: 1px dashed #e9d5ff;
     font-size: 15px;
 }
 
 .cart-item span:nth-child(1){
     font-weight: 600;
-    color: #111827;
+    color: #4c1d95;
 }
 
 .cart-item span:nth-child(2){
@@ -96,26 +144,19 @@ input:focus, select:focus{
 
 .cart-item span:nth-child(3){
     font-weight: 700;
-    color: #111827;
+    color: #6d28d9;
 }
 
-.cart-item span:first-child{
-    color: #959497;
-}
 .cart-item p span:first-child{
-    color: #32f900;
+    color: #ca8a04;
+    font-weight: 700;
 }
-
-.cart-item span:last-child{
-    font-weight: 600;
-}
-
 
 /* ---------- TOTAL ---------- */
 hr{
     margin: 28px 0;
     border: none;
-    border-top: 1px solid #e5e7eb;
+    border-top: 2px solid #ede9fe;
 }
 
 h3:last-of-type{
@@ -123,60 +164,64 @@ h3:last-of-type{
     justify-content: space-between;
     align-items: center;
     font-size: 22px;
-    font-weight: 700;
-    color: #111827;
+    font-weight: 800;
+    color: #6d28d9;
 }
 
 /* ---------- BUTTON ---------- */
 button{
     width: 100%;
-    margin-top: 32px;
-    padding: 16px;
+    margin-top: 34px;
+    padding: 18px;
     font-size: 18px;
-    font-weight: 700;
-    border-radius: 14px;
+    font-weight: 800;
+    border-radius: 16px;
     border: none;
     cursor: pointer;
-    color: #fff;
-    background: linear-gradient(135deg, #ff5a5f, #ff7a18);
-    box-shadow: 0 14px 28px rgba(255,90,95,0.35);
-    transition: all 0.2s ease;
+    color: #4c1d95;
+    background: linear-gradient(135deg, #facc15, #fde047);
+    box-shadow: 0 16px 32px rgba(250,204,21,0.4);
+    transition: all 0.25s ease;
 }
 
 button:hover{
-    transform: translateY(-2px);
-    box-shadow: 0 20px 36px rgba(255,90,95,0.45);
+    transform: translateY(-3px);
+    box-shadow: 0 22px 38px rgba(250,204,21,0.55);
 }
 
 button:active{
-    transform: scale(0.97);
+    transform: scale(0.96);
 }
+
+
 
 /* ---------- RESPONSIVE ---------- */
 
 /* Tablets */
 @media (max-width: 900px){
-    .container{
+    .container5{
         margin: 30px 20px;
-        padding: 26px;
+        padding: 28px;
     }
 
     h2{
-        font-size: 26px;
+        font-size: 28px;
     }
 }
 
 /* Mobiles */
 @media (max-width: 600px){
+    h2{
+        font-size: 24px;
+    }
+
     .cart-item{
         grid-template-columns: 1.6fr 1fr auto;
-        gap: 8px;
-        align-items: center;
+        gap: 6px;
     }
 
     .cart-item span:nth-child(1){
         font-size: 14px;
-        font-weight: 600;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -185,36 +230,166 @@ button:active{
     .cart-item span:nth-child(2){
         font-size: 13px;
         text-align: center;
-        color: #6b7280;
     }
 
     .cart-item span:nth-child(3){
         font-size: 14px;
-        font-weight: 700;
         text-align: right;
     }
-    
-}
 
+    button{
+        font-size: 16px;
+        padding: 16px;
+    }
+}
 
 /* Very small devices */
 @media (max-width: 360px){
     h2{
         font-size: 22px;
     }
-
-    button{
-        font-size: 16px;
-        padding: 14px;
-    }
 }
 
+
 </style>
-</head>
+    </head>
 
-<body>
+    <body>
+        <div class="main-wrapper">
+            <div class="nav-background">
+                <div class="mobile-logo">
+                    <img src="../static/icons/logo.svg" alt>
+                </div>
+                <div class="mobile-nav">
+                    <div class="cart">
+                        <div class="flex items-center">
+                            <img src="../static/icons/cart-dark.svg" alt>
+                            <a href="{{ url_for('menu') }}" class="cart-count">0
+                                items</a>
 
-<div class="container">
+                        </div>
+                    </div>
+                    <div class="nav-top">
+                        <ul>
+                            <li>
+                                <a href="{{ url_for('index') }}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('about') }}">About us</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('menu') }}">Menu</a>
+                            </li>
+                             <li>
+                                <a href="{{ url_for('my_orders') }}">My
+                                    Orders</a>
+                            </li>
+                            <!-- <li>
+                                <a href="#">Shop</a>
+                            </li> -->
+                            <li>
+                                <a href="#">Services</a>
+                            </li>
+                            <li>
+                                <a href="#">Contact us</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('logout') }}">Logout</a>
+                            </li>
+                            <li>
+                                <a href="#">Account</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contact flex items-center">
+                        <img src="../static/icons/phone.svg" alt>
+                        <div>
+                            <h5>Call Us : (+91) 00000-00000</h5>
+                            <h6>E-mail : freshmeal@gmail.com</h6>
+                        </div>
+                    </div>
+                    <div class="time flex items-center">
+                        <img src="../static/icons/clock.svg" alt>
+                        <div>
+                            <h5>Working hours</h5>
+                            <h6>Mon-sat (8:00am - 11:00pm)</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="site-content-wrapper">
+                <div class="nav-trigger">
+                    <!-- <button id="menu-hamburger" aria-label="Toggle Menu"> -->
+                    <svg width="30" height="30" viewBox="0 0 30 30"
+                        fill="none" xmlns="www.w3.org">
+                        <path d="M4 8H26" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" />
+                        <path d="M4 15H26" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" />
+                        <path d="M4 22H26" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" />
+                    </svg>
+                    <!-- </button> -->
+                </div>
+                <div class="site-content">
+                    <header class="topbar1">
+                        <div
+                            class="container flex justify-between items-center">
+                            <div class="icons">
+                                <!-- <a href="#">
+                                    <img
+                                        src="../static/icons/facebook.svg" alt></a>
+                                <a href="#"><img
+                                        src="../static/icons/twitter.svg"
+                                        alt></a>
+                                <a href="#"><img
+                                        src="../static/icons/google.svg"
+                                        alt></a>
+                                <a href="#"><img
+                                        src="../static/icons/instagram.svg"
+                                        alt></a>
+                                <a href="#"><img
+                                        src="../static/icons/search.svg"
+                                        alt></a> -->
+                                <a href="{{ url_for('index') }}">Home</a>
+                                <a href="{{ url_for('about') }}">About</a>
+                                <a href="{{ url_for('menu') }}">Menu</a>
+                                <a href="{{ url_for('my_orders') }}">My Orders</a>
+                                <a href="#">Services</a>
+                                <a href="#">Contact</a>
+                                
+                            </div>
+                            <div class="auth flex items-center">
+
+                                <div>
+                                    <img src="../static/icons/user-icon.svg"
+                                        alt>
+                                    <a href="{{ url_for('logout') }}">Logout</a>
+
+                                </div>
+                                <span class="divider">|</span>
+                                <div>
+                                    <img src="../static/icons/edit.svg" alt>
+                                    <a href="#">Account</a>
+                                </div>
+                                <span class="divider">|</span>
+                                <div>
+                                    <img src="../static/icons/cart.svg" alt>
+                                    <!-- <a href="javascript:void(0)" class="cart-count">0 items</a> -->
+                                    <a href="{{ url_for('menu') }}"
+                                        class="cart-count">0 items</a>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- <section class="hero1">
+                        <h1>About FoodieGuys</h1>
+                        <p>Serving delicious food with love, passion and premium
+                            quality ingredients since day one.</p>
+                    </section> -->
+
+<div class="container5">
 
 <h2>Checkout</h2>
 
@@ -248,7 +423,6 @@ button:active{
     <span>{{ item.name }}</span>
         <span> ({{ item.qty }} × ₹{{ item.price }})</span>
     <span>₹{{ item.price * item.qty }}</span>
-   
 </div>
 {% endfor %}
 <div class="cart-item">
@@ -268,6 +442,238 @@ button:active{
 
 </div>
 
+<div id="toast" class="toast"></div>
 
-</body>
-</html>
+
+                    <!-- big dael -->
+                    <!-- <section class="big-deal">
+                        <div class="container">
+                            <h1 class="section-heading text-pure">Big deal of
+                                the week</h1>
+                            <div class="timer">
+
+                                <div>
+                                    <span>02</span>
+                                    <span>days</span>
+                                </div>
+                                <div>
+                                    <span>24</span>
+                                    <span>hours</span>
+                                </div>
+                                <div>
+                                    <span>55</span>
+                                    <span>Minutes</span>
+                                </div>
+                                <div>
+                                    <span>58</span>
+                                    <span>seconds</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section> -->
+
+                    <!-- subscribe-section -->
+                    <!-- <section class="subscribe">
+                        <div class="container flex items-center">
+                            <div>
+                                <img src="../static/images/rasberry.png" alt>
+                            </div>
+                            <div>
+                                <h1>Subscribe to your newsletter</h1>
+                                <p>Subscribe to get exclusive offers,new menu
+                                    updates, and mouth-watering recipes.</p>
+                                <div class="input-wrap">
+                                    <input type="email"
+                                        placeholder="email@foodguys.com">
+                                    <button>subscribe</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section> -->
+
+                    <!-- footer -->
+                    <!-- <footer>
+                        <div class="container">
+                            <div class="box">
+                                <h3>about us</h3>
+                                <p>FoodieGuys brings you delicious food crafted
+                                    with passion. Fresh ingredients, modern
+                                    taste & love in every bite.</p>
+                                <a href="{{url_for ('about')}}">
+                                    <button class="btn btn-secondary"> Read
+                                    More</button>
+                                </a>
+                            </div>
+                            <div class="box">
+                                <h3>quick links</h3>
+                                <ul>
+                                    <li>
+                                        <a
+                                            href="{{ url_for('index') }}">Home</a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="{{ url_for('about') }}">About</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('menu') }}">Menu</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('my_orders') }}">My Orders</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Services</a>
+                                    </li>
+                                   
+                                    <li>
+                                        <a href="#">Contact</a>
+                                    </li>
+                                     <li>
+                                        <a href="#">Acount</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box">
+                                <h3>Follow Us</h3>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <img
+                                                    src="../static/icons/facebook.svg"
+                                                    alt>
+                                                <span>Facebook</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img
+                                                    src="../static/icons/twitter.svg"
+                                                    alt>
+                                                <span>Twitter</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img
+                                                    src="../static/icons/instagram.svg"
+                                                    alt>
+                                                <span>Instagram</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img
+                                                    src="../static/icons/google.svg"
+                                                    alt>
+                                                <span>Google</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div class="box instagram-api">
+                                <h3>Instagram</h3>
+                                <div class="post-wrap">
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+                                    <div>
+                                        <img
+                                            src="../static/images/food-table.jpg"
+                                            alt>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </footer> -->
+                        <!--footer - 2  -->
+                        <footer class="copyright">
+                            <div>
+                                copyright &copy; 2025 <a
+                                    href="#">freshmeal.com</a> | All rights
+                                reserved
+                            </div>
+                            powered by <a href="#">FoodieGuys</a>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back To Top Button -->
+            <!-- <button id="backToTop" title="Go to top">⬆</button> -->
+
+            <script type="text/javascript"
+                src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+            <script type="text/javascript"
+                src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+            <script type="text/javascript"
+                src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+            <script src="../static/js/app.js"></script>
+            <!-- <script src="../static/js/script.js"></script> -->
+            <script src="../static/js/cart.js"></script>
+            <script src="../static/js/menu.js"></script>
+            <script src="../static/js/backtotop.js"></script>
+        </body>
+
+    </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

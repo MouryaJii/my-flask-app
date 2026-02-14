@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fresh Meal | Order Confirmed</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(135deg,#ffecd2,#fcb69f);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.success-wrapper{
+    background:#fff;
+    width:95%;
+    max-width:520px;
+    border-radius:18px;
+    padding:24px 20px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.15);
+    text-align:center;
+    animation:fadeIn 0.8s ease;
+}
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+}
+.checkmark{
+    width:72px;
+    height:72px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#28a745,#6fdc8c);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 12px;
+}
+.checkmark svg{
+    width:36px;
+    height:36px;
+    stroke:#fff;
+    stroke-width:4;
+    fill:none;
+}
+.success-wrapper h1{
+    margin:8px 0 6px;
+    color:#28a745;
+    font-size:22px;
+    font-weight:600;
+}
+.success-wrapper .subtitle{
+    margin:0;
+    color:#555;
+    font-size:14px;
+}
+.section{
+    margin-top:18px;
+    text-align:left;
+}
+.section h3{
+    margin:0 0 12px;
+    font-size:15px;
+    font-weight:500;
+    color:#333;
+}
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px 0;
+    border-bottom:1px dashed #eee;
+    font-size:14px;
+}
+.info-row span:last-child{
+    font-weight:500;
+    color:#222;
+}
+.items{
+    margin-top:12px;
+}
+.item{
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    padding:6px 0;
+}
+.total{
+    display:flex;
+    justify-content:space-between;
+    margin-top:14px;
+    padding-top:10px;
+    border-top:1px solid #eee;
+    font-weight:600;
+    font-size:16px;
+}
+.actions{
+    display:flex;
+    gap:12px;
+    margin-top:14px;
+}
+.actions a{
+    flex:1;
+    text-decoration:none;
+    padding:10px 0;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:500;
+    text-align:center;
+    transition:0.3s ease;
+}
+.btn-home{
+    background:#ff6b35;
+    color:#fff;
+}
+.btn-home:hover{
+    background:#e85a28;
+}
+.btn-orders{
+    border:1px solid #ff6b35;
+    color:#ff6b35;
+}
+.btn-orders:hover{
+    background:#fff4ee;
+}
+.thankyou{
+    margin-top:20px;
+    font-size:13px;
+    color:#777;
+    line-height:1.5;
+}
+</style>
+</head>
+<body>
+
+<div class="success-wrapper">
+
+
+<div class="checkmark">
+    <svg viewBox="0 0 52 52">
+        <path d="M14 27l7 7 17-17"/>
+    </svg>
+</div>
+
+<h1>Order Confirmed</h1>
+<p class="subtitle">Thank you! Your payment was successful and your order has been placed 🎉</p>
+
+<div class="section">
+    <h3>Order Summary</h3>
+    <!-- <div class="info-row"><span>Order ID</span><span>{{ order_id }}</span></div> -->
+    <div class="info-row"><span>Payment ID</span><span>{{ payment_id }}</span></div>
+    <div class="info-row"><span>Payment Method</span><span>Online</span></div>
+    <div class="info-row"><span>Order Date</span><span>{{ order_date }}</span></div>
+    <!-- <div class="info-row"><span>Delivery Charge</span><span>₹{{ delivery_charge }}</span></div> -->
+
+    <div class="items">
+        {% for item in items %}
+        <div class="item">
+            <span>{{ item.name }} × {{ item.qty }}</span>
+            <span>₹{{ item.price * item.qty }}</span>
+        </div>
+        {% endfor %}
+        <div class="info-row"><span>Delivery Charge</span><span>₹{{ delivery_charge }}</span></div>
+    </div>
+
+    <div class="total">
+        <span>Total Amount Paid</span>
+        <span>₹{{ total_amount }}</span>
+    </div>
+</div>
+
+<div class="actions">
+    <a href="/" class="btn-home">Back to Home</a>
+    <a href="{{ url_for('my_orders') }}" class="btn-orders">View My Orders</a>
+</div>
+
+<div class="thankyou">
+    We appreciate your order ❤️<br>
+    Your food is being prepared and will be delivered shortly.
+</div>
+
+
+</div>
+
+</body>
+</html>

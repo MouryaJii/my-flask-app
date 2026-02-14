@@ -9,12 +9,17 @@
             href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
         <link rel="icon" href="../static/images/websiteicon.png"
             type="image/x-icon">
-        <title>FoodieGuys | About Us</title>
+        <title>Fresh Meal | About Us</title>
         <link rel="stylesheet" href="../static/css/backtotop.css">
         <link rel="stylesheet" href="../static/css/style.css">
         <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css'
             rel='stylesheet'>
-
+<style>
+    * {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+</style>
     </head>
 
     <body>
@@ -43,9 +48,10 @@
                             <li>
                                 <a href="{{ url_for('menu') }}">Menu</a>
                             </li>
-                            <!-- <li>
-                                <a href="#">Blog</a>
-                            </li> -->
+                             <li>
+                                <a href="{{ url_for('my_orders') }}">My
+                                    Orders</a>
+                            </li>
                             <!-- <li>
                                 <a href="#">Shop</a>
                             </li> -->
@@ -59,7 +65,7 @@
                                 <a href="{{ url_for('logout') }}">Logout</a>
                             </li>
                             <li>
-                                <a href="#">Register Now</a>
+                                <a href="#">Account</a>
                             </li>
                         </ul>
                     </div>
@@ -67,14 +73,14 @@
                         <img src="../static/icons/phone.svg" alt>
                         <div>
                             <h5>Call Us : (+91) 00000-00000</h5>
-                            <h6>E-mail : foodyguys@gmail.com</h6>
+                            <h6>E-mail : freshmeal@gmail.com</h6>
                         </div>
                     </div>
                     <div class="time flex items-center">
                         <img src="../static/icons/clock.svg" alt>
                         <div>
                             <h5>Working hours</h5>
-                            <h6>Mon-sat (8:00am - 12:00am)</h6>
+                            <h6>Mon-sat (8:00am - 11:00pm)</h6>
                         </div>
                     </div>
                 </div>
@@ -116,8 +122,10 @@
                                 <a href="{{ url_for('index') }}">Home</a>
                                 <a href="{{ url_for('about') }}">About</a>
                                 <a href="{{ url_for('menu') }}">Menu</a>
-                                <!-- <a href="#">Gallery</a> -->
+                                <a href="{{ url_for('my_orders') }}">My Orders</a>
+                                <a href="#">Services</a>
                                 <a href="#">Contact</a>
+                                
                             </div>
                             <div class="auth flex items-center">
 
@@ -130,7 +138,7 @@
                                 <span class="divider">|</span>
                                 <div>
                                     <img src="../static/icons/edit.svg" alt>
-                                    <a href="#">register now</a>
+                                    <a href="#">Account</a>
                                 </div>
                                 <span class="divider">|</span>
                                 <div>
@@ -144,7 +152,7 @@
                     </header>
 
                     <section class="hero1">
-                        <h1>About FoodieGuys</h1>
+                        <h1>About Fresh Meal</h1>
                         <p>Serving delicious food with love, passion and premium
                             quality ingredients since day one.</p>
                     </section>
@@ -339,9 +347,9 @@
 
                     <!-- ================= ABOUT ================= -->
                     <section class="section2">
-                        <h2>Our Story</h2>
+                        <h2 class="section-heading">Our Story</h2>
                         <p>
-                            FoodieGuys was started with a simple mission – to
+                           Fresh Meal was started with a simple mission – to
                             deliver tasty, hygienic and affordable food
                             that feels like home. Every dish is prepared with
                             fresh ingredients and authentic flavors.
@@ -368,26 +376,26 @@
 
                     <!-- ================= TEAM ================= -->
                     <section class="section3 section2 team1">
-                        <h2>Meet Our Team</h2>
-                        <p>The passionate people behind FoodieGuys.</p>
+                        <h2 class="section-heading">Meet Our Team</h2>
+                        <p>The passionate people behind Fresh Meal.</p>
 
                         <div class="team1-cards">
                             <div class="team1-card">
-                                <img src="../static/images/plate-3.png"
+                                <img src="../static/images/shef2.jpg"
                                     alt="Founder">
-                                <h4>Ravi Mourya</h4>
+                                <h4>Sunil Raj</h4>
                                 <span>Founder</span>
                             </div>
 
                             <div class="team1-card">
-                                <img src="../static/images/plate-1.png"
+                                <img src="../static/images/shef1.jpg"
                                     alt="Chef">
                                 <h4>Rahul Sharma</h4>
                                 <span>Head Chef</span>
                             </div>
 
                             <div class="team1-card">
-                                <img src="../static/images/plate-2.png"
+                                <img src="../static/images/manager.jpg"
                                     alt="Manager">
                                 <h4>Anjali Verma</h4>
                                 <span>Restaurant Manager</span>
@@ -434,7 +442,7 @@
                                     updates, and mouth-watering recipes.</p>
                                 <div class="input-wrap">
                                     <input type="email"
-                                        placeholder="email@foodyguys.com">
+                                        placeholder="email@freshmeal.com">
                                     <button>subscribe</button>
                                 </div>
                             </div>
@@ -446,11 +454,13 @@
                         <div class="container">
                             <div class="box">
                                 <h3>about us</h3>
-                                <p>FoodieGuys brings you delicious food crafted
+                                <p>Fresh Meal brings you delicious food crafted
                                     with passion. Fresh ingredients, modern
                                     taste & love in every bite.</p>
-                                <button class="btn btn-secondary"> Read
+                                <a href="{{url_for ('about')}}">
+                                    <button class="btn btn-secondary"> Read
                                     More</button>
+                                </a>
                             </div>
                             <div class="box">
                                 <h3>quick links</h3>
@@ -466,17 +476,18 @@
                                     <li>
                                         <a href="{{ url_for('menu') }}">Menu</a>
                                     </li>
-                                    <!-- <li>
-                                        <a href="#">Blog</a>
-                                    </li> -->
+                                    <li>
+                                        <a href="{{ url_for('my_orders') }}">My Orders</a>
+                                    </li>
                                     <li>
                                         <a href="#">Services</a>
                                     </li>
-                                    <!-- <li>
-                                        <a href="#">Gallery</a>
-                                    </li> -->
+                                   
                                     <li>
                                         <a href="#">Contact</a>
+                                    </li>
+                                     <li>
+                                        <a href="#">Acount</a>
                                     </li>
                                 </ul>
                             </div>
@@ -561,9 +572,11 @@
                         <footer class="copyright">
                             <div>
                                 copyright &copy; 2025 <a
-                                    href="#">foodyguys.com</a> | All rights
+                                    href="#">freshmeal.com</a> | All rights
                                 reserved
+                                
                             </div>
+                            Powered by <a href="#">FoodieGuys</a>
                         </footer>
                     </div>
                 </div>

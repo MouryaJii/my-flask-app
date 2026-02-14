@@ -7,23 +7,192 @@
         <meta http-equiv="X-UA-Compatible" content="IE=7">
         <link rel="stylesheet" type="text/css"
             href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-        <!-- <link rel="icon" href="../static/images/websiteicon.png"
-            type="image/x-icon"  sizes="32x32"> -->
-        <link rel="icon" type="image/png"
-            href="../static/images/websiteicon.png">
-
-        <title>Fresh Meal | Home</title>
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link rel="icon" href="../static/images/websiteicon.png"
+            type="image/x-icon">
+        <title>Fresh Meal | My Orders</title>
         <link rel="stylesheet" href="../static/css/backtotop.css">
         <link rel="stylesheet" href="../static/css/style.css">
-        <link rel="stylesheet" href="../static/css/menu.css">
         <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css'
             rel='stylesheet'>
-<style>
-    * {
+
+        <style>
+            * {
   -webkit-tap-highlight-color: transparent;
   outline: none;
 }
+/* *{
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+} */
+
+/* body{
+    margin:0;
+    padding:20px;
+    min-height:100vh;
+    background:linear-gradient(135deg,#ffecd2,#fcb69f);
+} */
+
+/* PAGE TITLE */
+.page-title{
+    max-width:900px;
+    margin:30px auto 20px;   /* 👈 TOP SPACE ADDED */
+    padding:0 16px; 
+    /* margin:0 auto 14px; */
+    font-size:24px;
+    font-weight:600;
+    color:#ff6b35;
+}
+
+/* WRAPPER */
+.orders-wrapper{
+    max-width:1000px;
+    margin:40px auto 40px;
+}
+
+/* ORDER CARD */
+.order-card{
+    background:#fff;
+    padding:20px 20px 18px;
+    border-radius:18px;
+    margin-bottom:14px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+    animation:fadeIn 0.6s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+.order-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:5px;
+    background:linear-gradient(90deg,#ff6b35,#ff9f1c,#2ec4b6);
+}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* TOP ROW */
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+}
+
+.order-id{
+    font-size:15px;
+    font-weight:600;
+    color:#333;
+}
+
+.order-date{
+    font-size:12px;
+    color:#777;
+    margin-top:2px;
+}
+
+/* STATUS */
+.status{
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.status.placed{
+    background:linear-gradient(135deg,#e3f2fd,#bbdefb);
+    color:#1565c0;
+}
+
+.status.preparing{
+    background:linear-gradient(135deg,#fff7ed,#fed7aa);
+    color:#c2410c;
+}
+
+.status.on_the_way,
+.status.out_for_delivery{
+    background:linear-gradient(135deg,#e1f5fe,#b3e5fc);
+    color:#0277bd;
+}
+
+.status.delivered{
+    background:linear-gradient(135deg,#e8f5e9,#c8e6c9);
+    color:#2e7d32;
+}
+
+.status.cancelled{
+    background:linear-gradient(135deg,#fee2e2,#fecaca);
+    color:#991b1b;
+}
+
+
+/* TOTAL */
+.total{
+    margin-top:12px;
+    font-size:14px;
+    color:#444;
+    font-weight:500;
+}
+
+.total span{
+    font-weight:600;
+    color:#111;
+}
+
+/* ACTION */
+.actions{
+    margin-top:10px;
+    text-align:right;
+}
+
+.actions a{
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    color:#ff6b35;
+    padding:6px 14px;
+    border-radius:20px;
+    border:1px solid #ff6b35;
+    transition:0.3s ease;
+}
+
+.actions a:hover{
+    background:#fff2ec;
+}
+
+/* EMPTY STATE */
+.empty{
+    background:#fff;
+    padding:30px;
+    border-radius:18px;
+    text-align:center;
+    color:#666;
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* MOBILE */
+@media(max-width:600px){
+    /* body{
+        padding:14px;
+    } */
+    .page-title{
+        text-align:center;
+        font-size:20px;
+    }
+    .orders-wrapper{
+    max-width:800px;
+    /* margin:40px auto 40px; */
+}
+}
 </style>
+
     </head>
 
     <body>
@@ -38,12 +207,13 @@
                             <img src="../static/icons/cart-dark.svg" alt>
                             <a href="{{ url_for('menu') }}" class="cart-count">0
                                 items</a>
+
                         </div>
                     </div>
                     <div class="nav-top">
                         <ul>
                             <li>
-                                <a href="{{ url_for('home') }}">Home</a>
+                                <a href="{{ url_for('index') }}">Home</a>
                             </li>
                             <li>
                                 <a href="{{ url_for('about') }}">About us</a>
@@ -52,9 +222,11 @@
                                 <a href="{{ url_for('menu') }}">Menu</a>
                             </li>
                             <li>
-                                <a href="{{ url_for('my_orders') }}">My
-                                    Orders</a>
+                                <a href="{{ url_for('my_orders') }}">My Orders</a>
                             </li>
+                            <!-- <li>
+                                <a href="#">Shop</a>
+                            </li> -->
                             <li>
                                 <a href="#">Services</a>
                             </li>
@@ -64,12 +236,8 @@
                             <li>
                                 <a href="{{ url_for('logout') }}">Logout</a>
                             </li>
-                            <!-- <li>
-                                <a href="#">Shop</a>
-                            </li> -->
-
                             <li>
-                                <a href="#">Acount</a>
+                                <a href="#">Account</a>
                             </li>
                         </ul>
                     </div>
@@ -89,9 +257,6 @@
                     </div>
                 </div>
             </div>
-
-            <div id="menuOverlay"></div>
-
             <div class="site-content-wrapper">
                 <div class="nav-trigger">
                     <!-- <button id="menu-hamburger" aria-label="Toggle Menu"> -->
@@ -107,13 +272,13 @@
                     <!-- </button> -->
                 </div>
                 <div class="site-content">
-                    <header class="topbar">
+                    <header class="topbar1">
                         <div
                             class="container flex justify-between items-center">
                             <div class="icons">
-                                <a href="#"><img
-                                        src="../static/icons/facebook.svg"
-                                        alt></a>
+                                <!-- <a href="#">
+                                    <img
+                                        src="../static/icons/facebook.svg" alt></a>
                                 <a href="#"><img
                                         src="../static/icons/twitter.svg"
                                         alt></a>
@@ -125,7 +290,13 @@
                                         alt></a>
                                 <a href="#"><img
                                         src="../static/icons/search.svg"
-                                        alt></a>
+                                        alt></a> -->
+                                <a href="{{ url_for('index') }}">Home</a>
+                                <a href="{{ url_for('about') }}">About</a>
+                                <a href="{{ url_for('menu') }}">Menu</a>
+                                <a href="{{ url_for('my_orders') }}">My Orders</a>
+                                <a href="#">Services</a>
+                                <a href="#">Contact</a>
                             </div>
                             <div class="auth flex items-center">
 
@@ -138,11 +309,12 @@
                                 <span class="divider">|</span>
                                 <div>
                                     <img src="../static/icons/edit.svg" alt>
-                                    <a href="#">Acount</a>
+                                    <a href="#">Account</a>
                                 </div>
                                 <span class="divider">|</span>
                                 <div>
                                     <img src="../static/icons/cart.svg" alt>
+                                    <!-- <a href="javascript:void(0)" class="cart-count">0 items</a> -->
                                     <a href="{{ url_for('menu') }}"
                                         class="cart-count">0 items</a>
                                 </div>
@@ -150,74 +322,14 @@
                         </div>
                     </header>
 
-                    <nav>
-                        <div class="top">
-                            <div class="container flex justify-between">
-                                <div class="contact flex items-center">
-                                    <img src="../static/icons/phone.svg" alt>
-                                    <div>
-                                        <h5>call us : (+91) 00000-00000</h5>
-                                        <h6>E-mail : freshmeal@gmail.com</h6>
-                                    </div>
-                                </div>
-                                <div class="branding">
-                                    <img src="../static/icons/logo.svg" alt>
-                                </div>
-                                <div class="time flex items-center">
-                                    <img src="../static/icons/clock.svg" alt>
-                                    <div>
-                                        <h5>working time</h5>
-                                        <h6>mon-sat (8:00am - 11:00pm)</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="navbar magic-shadow">
-                            <div class="container flex justify-center">
-                                <a href="{{ url_for('home') }}"
-                                    class="active">Home</a>
-                                <a href="{{ url_for('about') }}">About</a>
-                                <a href="{{ url_for('menu') }}">Menu</a>
-                                <a href="{{ url_for('my_orders') }}">My
-                                    Orders</a>
-                                <!-- <a href="#">Blog</a> -->
-                                <a href="#">Services</a>
-                                <!-- <a href="#">gallery</a> -->
-                                <a href="#">Contact Us</a>
-                            </div>
-                        </div>
-                    </nav>
-                    <header class="hero flex items-center">
-                        <div class="container">
-                            <div class="wellcome flex items-center">
-                                <span>Wellcome to</span>
-                                <img src="../static/icons/logo.svg" alt>
-                            </div>
-                            <h1>The world best <span>shoping</span> Website</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit.
-                                Hic, porro accusamus! In porro, autem facilis
-                                alias ipsa
-                                fuga a eius mollitia eum.
-                                Porro dolorem repellat necessitatibus.
-                                Veniam vel repellat maxime!</p>
-                            <div>
-                                <a href="{{ url_for('about') }}">
-                                    <button class="btn btn-primary">Read
-                                        More</button></a>
-                                <a href="{{ url_for('my_orders') }}">
-                                    <button class="btn btn-secondary">Go To
-                                        Menu</button></a>
-                            </div>
-                            <div class="hero-image">
-                                <img src="../static/images/straw.png" alt>
-                            </div>
-                        </div>
-                    </header>
+                     <section class="hero1">
+                        <h1>My Orders</h1>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </section>
 
-                    <section class="top-products">
+                    <!-- <section class="top-products">
                         <div class="container">
-                            <h1 class="section-heading">Top Products</h1>
+                            <h1 class="section-heading"></h1>
                             <div class="slider">
                                 <button class="slider-btn prev-btn"><img
                                         src="../static/icons/arrow-left-circle.svg"
@@ -256,13 +368,10 @@
                                                     alt>
                                             </div>
                                             <div class="price text-center">
-                                                &#8377;50
+                                                $1.50
                                             </div>
                                             <div class="flex justify-center">
-                                                <button class="add-to-cart"
-                                                    data-id="101"
-                                                    data-name="Summer Salad"
-                                                    data-price="50">
+                                                <button>
                                                     <img
                                                         src="../static/icons/cart-2.svg"
                                                         alt>
@@ -301,13 +410,10 @@
                                                     alt>
                                             </div>
                                             <div class="price text-center">
-                                                &#8377;50
+                                                $1.50
                                             </div>
                                             <div class="flex justify-center">
-                                                <button class="add-to-cart"
-                                                    data-id="102"
-                                                    data-name="Russian Salad"
-                                                    data-price="50">
+                                                <button>
                                                     <img
                                                         src="../static/icons/cart-2.svg"
                                                         alt>
@@ -325,7 +431,7 @@
                                         </div>
                                         <hr>
                                         <div>
-                                            <h2 class="text-center">Greek
+                                            <h2 class="text-center">greek
                                                 Salad</h2>
                                             <div
                                                 class="stars flex justify-center items-center">
@@ -346,13 +452,10 @@
                                                     alt>
                                             </div>
                                             <div class="price text-center">
-                                                &#8377;50
+                                                $1.50
                                             </div>
                                             <div class="flex justify-center">
-                                                <button class="add-to-cart"
-                                                    data-id="103"
-                                                    data-name="Greek Salad"
-                                                    data-price="50">
+                                                <button>
                                                     <img
                                                         src="../static/icons/cart-2.svg"
                                                         alt>
@@ -370,8 +473,8 @@
                                         </div>
                                         <hr>
                                         <div>
-                                            <h2 class="text-center">Cottage
-                                                Pie</h2>
+                                            <h2 class="text-center">cottage
+                                                pie</h2>
                                             <div
                                                 class="stars flex justify-center items-center">
                                                 <img
@@ -391,13 +494,10 @@
                                                     alt>
                                             </div>
                                             <div class="price text-center">
-                                                &#8377;50
+                                                $1.50
                                             </div>
                                             <div class="flex justify-center">
-                                                <button class="add-to-cart"
-                                                    data-id="104"
-                                                    data-name="Cottage Pie"
-                                                    data-price="50">
+                                                <button>
                                                     <img
                                                         src="../static/icons/cart-2.svg"
                                                         alt>
@@ -409,290 +509,69 @@
                                 </div>
                             </div>
                             <div class="text-center btn-wrapper">
-                                <a href="{{ url_for('menu') }}">
-                                    <button class="btn btn-secondary">View All
-                                        Products</button>
-                                </a>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- adouth meal  -->
-                    <section class="about-meal">
-                        <div class="container">
-                            <h1 class="section-heading">
-                                About Our Meal
-                            </h1>
-                            <div class="about-meal-wrap flex">
-                                <div class="flex-1">
-                                    <img src="../static/images/yogurt.png" alt>
-                                </div>
-                                <div class="flex-1">
-                                    <h2>Fresh meal is a long estableished fast
-                                        that a reader
-                                        will be distracted</h2>
-                                    <p>Lorem ipsum dolor sit amet consectetur
-                                        adipisicing
-                                        elit.
-                                        A pariatur non totam rerum neque
-                                        necessitatibus
-                                        placeat omnis,
-                                        vitae est, amet ad voluptatibus ratione
-                                        quae quod
-                                        qui ipsa,
-                                        suscipit sunt? Obcaecati?</p>
-                                    <a href="{{url_for ('about')}}">
-                                        <button class="btn btn-secondary">Read
-                                        More</button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- services -->
-                    <section class="our-services">
-                        <div class="container">
-                            <h1 class="section-heading">Our services</h1>
-                            <div class="card-wrapper flex">
-                                <div class="service-card magic-shadow-sm">
-                                    <img class="icon"
-                                        src="../static/icons/transport.svg" alt>
-                                    <h2>Free home delivery</h2>
-                                    <p>Lorem ipsum dolor sit amet consectetur
-                                        adipisicing
-                                        elit.
-                                        Reprehenderit beatae necessitatibus id
-                                        eos nobis
-                                        itaque
-                                        unde saepe excepturi nemo delectus, est
-                                        nesciunt
-                                        ipsa,
-                                        tenetur a maiores eveniet? Eos, quisquam
-                                        voluptas!</p>
-                                    <button class="btn btn-secondary">Read
-                                        More</button>
-                                </div>
-                                <div class="service-card magic-shadow-sm">
-                                    <img class="icon"
-                                        src="../static/icons/bag.svg" alt>
-                                    <h2 class="text-primary">30 days
-                                        ReturnServices</h2>
-                                    <p>Lorem ipsum dolor sit amet consectetur
-                                        adipisicing
-                                        elit.
-                                        Reprehenderit beatae necessitatibus id
-                                        eos nobis
-                                        itaque
-                                        unde saepe excepturi nemo delectus, est
-                                        nesciunt
-                                        ipsa,
-                                        tenetur a maiores eveniet? Eos, quisquam
-                                        voluptas!</p>
-                                    <button class="btn btn-primary">Read
-                                        More</button>
-                                </div>
-                                <div class="service-card magic-shadow-sm">
-                                    <img class="icon"
-                                        src="../static/icons/usd.svg" alt>
-                                    <h2>Mony back Guaranted</h2>
-                                    <p>Lorem ipsum dolor sit amet consectetur
-                                        adipisicing
-                                        elit.
-                                        Reprehenderit beatae necessitatibus id
-                                        eos nobis
-                                        itaque
-                                        unde saepe excepturi nemo delectus, est
-                                        nesciunt
-                                        ipsa,
-                                        tenetur a maiores eveniet? Eos, quisquam
-                                        voluptas!</p>
-                                    <button class="btn btn-secondary">Read
-                                        More</button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!-- big dael -->
-                    <section class="big-deal">
-                        <div class="container">
-                            <h1 class="section-heading text-pure">Big deal of
-                                the week</h1>
-                            <div class="timer">
-
-                                <div>
-                                    <span>02</span>
-                                    <span>days</span>
-                                </div>
-                                <div>
-                                    <span>24</span>
-                                    <span>hours</span>
-                                </div>
-                                <div>
-                                    <span>55</span>
-                                    <span>Minutes</span>
-                                </div>
-                                <div>
-                                    <span>58</span>
-                                    <span>seconds</span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="latest-news">
-                        <div class="container">
-                            <h1 class="section-heading">latest news from
-                                blog</h1>
-                            <div class="article-wrapper">
-                                <article class="card magic-shadow-sm">
-                                    <div>
-                                        <img src="../static/images/donut.jpg"
-                                            alt>
-                                    </div>
-                                    <div class="card-content">
-                                        <div
-                                            class="post-meta flex items-center justify-between">
-                                            <span>Des 03, 2025</span>
-                                            <div>
-                                                <span>posted by
-                                                    <strong>frestedMeal</strong></span>
-                                                <span class="comment-count">12
-                                                    Comments</span>
-                                            </div>
-                                        </div>
-
-                                        <h2>Lorem ipsum dolor sit amet
-                                            consectetur
-                                            adipisicing elit</h2>
-                                        <p>
-                                            Lorem ipsum dolor sit, amet
-                                            consectetur
-                                            adipisicing elit. Iure aliquam
-                                            labore id quod!
-                                            Excepturi saepe necessitatibus
-                                            doloremque
-                                            sapiente veritatis corporis odit
-                                            voluptates!
-                                        </p>
-
-                                    </div>
-                                </article>
-
-                                <article class="card magic-shadow-sm">
-                                    <div>
-                                        <img src="../static/images/coffee.jpg"
-                                            alt>
-                                    </div>
-                                    <div class="card-content">
-                                        <div
-                                            class="post-meta flex items-center justify-between">
-                                            <span>Des 03, 2025</span>
-                                            <div>
-                                                <span>posted by
-                                                    <strong>frestedMeal</strong></span>
-                                                <span class="comment-count">12
-                                                    Comments</span>
-                                            </div>
-                                        </div>
-
-                                        <h2>Lorem ipsum dolor sit amet
-                                            consectetur
-                                            adipisicing elit</h2>
-                                        <p>
-                                            Lorem ipsum dolor sit, amet
-                                            consectetur
-                                            adipisicing elit. Iure aliquam
-                                            labore id quod!
-                                            Excepturi saepe necessitatibus
-                                            doloremque
-                                            sapiente veritatis corporis odit
-                                            voluptates!
-                                        </p>
-
-                                    </div>
-                                </article>
-                            </div>
-                            <div class="text-center btn-wrapper">
                                 <button class="btn btn-secondary">view
-                                    all</button>
+                                    more</button>
                             </div>
                         </div>
-                    </section>
-                    <!-- subscribe-section -->
-                    <section class="subscribe">
-                        <div class="container flex items-center">
-                            <div>
-                                <img src="../static/images/rasberry.png" alt>
-                            </div>
-                            <div>
-                                <h1>Subscribe to your newsletter</h1>
-                                <p>Lorem, ipsum dolor sit amet consectetur
-                                    adipisicing elit.
-                                    Iste, debitis dicta.</p>
-                                <div class="input-wrap">
-                                    <input type="email"
-                                        placeholder="email@freshmeal.com">
-                                    <button>subscribe</button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!--contact-us -map  -->
-                    <section class="contact-us flex">
-                        <div class="contact-info-wrapper">
-                            <h1 class="section-heading">contact-us</h1>
-                            <div class="contact-info">
-                                <div>
-                                    <div>
-                                        <img src="../static/icons/phone-2.svg"
-                                            alt>
-                                        <div>
-                                            <span> Call us</span>
-                                            <span>(+91) 00000-00000</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <img src="../static/icons/email.svg"
-                                            alt>
-                                        <div>
-                                            <span>E-mail ::</span>
-                                            <span>support@gmail.com</span>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <img src="../static/icons/clock-2.svg"
-                                            alt>
-                                        <div>
-                                            <span>working hours</span>
-                                            <span>(+91) 00000-00000</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="map">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3694.2690768452526!2d78.74805487474624!3d22.191878246817712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd57dd79d5e1f23%3A0x3218902ff2550fdf!2sHotel%20Poonam%20Plaza!5e0!3m2!1sen!2sin!4v1764928778188!5m2!1sen!2sin"
-                                width="100%" height="100%" style="border:0;"
-                                allowfullscreen
-                                loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
-                    </section>
+                    </section> -->
+
+                   
+
+                  <!-- <div class="page-title">My Orders</div> -->
+<div class="orders-wrapper">
+
+{% for order in orders %}
+<div class="order-card" data-order-id="{{ order.id }}">
+    <div class="top">
+        <div>
+            <div class="order-id">Order #{{ order.id }}</div>
+            <div class="order-date">
+                {{ order.created_at.strftime("%d/%m/%Y %H:%M") }}
+            </div>
+        </div>
+
+        <div class="status {{ order.status }}">
+            {{ order.status.replace('_',' ').title() }}
+        </div>
+    </div>
+
+    <div class="total">
+        Total Paid: <span>₹{{ order.total_amount }}</span>
+    </div>
+
+    <div class="actions">
+        <a href="/order/{{ order.id }}">View Details →</a>
+    </div>
+</div>
+{% else %}
+<div class="empty">
+    <h3>No orders yet 😕</h3>
+    <p>Your placed orders will appear here.</p>
+</div>
+{% endfor %}
+
+</div>
+
+                  
+
+
                     <!-- footer -->
                     <footer>
                         <div class="container">
                             <div class="box">
                                 <h3>about us</h3>
-                                <p>Fresh Meal brings you delicious food crafted with passion. Fresh ingredients, modern taste & love in every bite.</p>
-                                <a href="{{url_for ('about')}}">
-                                    <button class="btn btn-secondary"> Read
+                                <p>Fresh Meal brings you delicious food crafted
+                                    with passion. Fresh ingredients, modern
+                                    taste & love in every bite.</p>
+                                <button class="btn btn-secondary"> Read
                                     More</button>
-                                </a>
                             </div>
                             <div class="box">
                                 <h3>quick links</h3>
                                 <ul>
                                     <li>
-                                        <a href="{{ url_for('home') }}">Home</a>
+                                        <a
+                                            href="{{ url_for('index') }}">Home</a>
                                     </li>
                                     <li>
                                         <a
@@ -710,8 +589,8 @@
                                     <li>
                                         <a href="#">Contact</a>
                                     </li>
-                                      <li>
-                                        <a href="#">Acount</a>
+                                    <li>
+                                        <a href="#">Account</a>
                                     </li>
                                 </ul>
                             </div>
@@ -815,15 +694,102 @@
             <script type="text/javascript"
                 src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
             <script src="../static/js/app.js"></script>
+            <!-- <script src="../static/js/script.js"></script> -->
             <script src="../static/js/cart.js"></script>
             <script src="../static/js/menu.js"></script>
             <script src="../static/js/backtotop.js"></script>
-            <!-- <script src="../static/js/script.js"></script> -->
 
 
-            
-            <div id="toast" class="toast"></div>
+            <script>
+function refreshOrderStatus() {
+    document.querySelectorAll(".order-card").forEach(card => {
+        const orderId = card.dataset.orderId;
+        const statusDiv = card.querySelector(".status");
+
+        fetch(`/order-status/${orderId}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.status) return;
+
+                if (!statusDiv.classList.contains(data.status)) {
+                    statusDiv.className = "status " + data.status;
+
+                    statusDiv.textContent = data.status
+                        .replace(/_/g, " ")
+                        .replace(/\b\w/g, c => c.toUpperCase());
+                }
+            })
+            .catch(err => console.log(err));
+    });
+}
+
+// ⏱️ 5 second me auto update
+setInterval(refreshOrderStatus, 5000);
+</script>
+
 
         </body>
 
     </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

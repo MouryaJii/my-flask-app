@@ -23,10 +23,31 @@ $(document).ready(function(){
 
     });
 
-    $('.nav-trigger').click(function(){
+   function closeMenu(){
+    $('.site-content-wrapper').removeClass('scaled');
+    $('body').removeClass('menu-open');
+}
+
+$('.nav-trigger').click(function(){
     $('.site-content-wrapper').toggleClass('scaled');
-    $('body').toggleClass('menu-open'); // 🔥 IMPORTANT
+    $('body').toggleClass('menu-open');
 });
+
+/* 🔥 EMPTY AREA CLICK CLOSE */
+$('#menuOverlay').click(function(){
+    closeMenu();
+});
+
+/* 🔥 BACK BUTTON / PAGE LOAD FIX */
+$(window).on('pageshow', function(){
+    closeMenu();
+});
+
+/* 🔥 MENU ITEM CLICK PAR BHI CLOSE */
+$('.mobile-nav a').click(function(){
+    closeMenu();
+});
+
     
 });
 

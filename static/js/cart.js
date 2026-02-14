@@ -43,25 +43,63 @@ function goToCheckout() {
 
 
 /* ---------- ADD TO CART ---------- */
-document.querySelectorAll(".add-to-cart").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const card = btn.closest(".menu-card");
+// document.querySelectorAll(".add-to-cart").forEach(btn => {
+//   btn.addEventListener("click", () => {
+//     const card = btn.closest(".menu-card");
 
+//     if (!card) return;
+
+//     const id = card.dataset.id;
+//     const name = card.dataset.name;
+//     const price = Number(card.dataset.price);
+
+//     let item = cart.find(i => i.id === id);
+
+//     if (item) item.qty++;
+//     else cart.push({ id, name, price, qty: 1 });
+
+//     localStorage.setItem("cart", JSON.stringify(cart));
+//     updateCartCount();
+//     openCart(); // 🔥 auto open with items
+//   });
+// });
+document.addEventListener("click", function (e) {
+  const btn = e.target.closest(".add-to-cart");
+  if (!btn) return;
+
+  // 🔥 CASE 1: Button me data-* diya hua
+  let id = btn.dataset.id;
+  let name = btn.dataset.name;
+  let price = Number(btn.dataset.price);
+
+  // 🔥 CASE 2: Menu page (menu-card)
+  if (!id) {
+    const card = btn.closest(".menu-card");
     if (!card) return;
 
-    const id = card.dataset.id;
-    const name = card.dataset.name;
-    const price = Number(card.dataset.price);
+    id = card.dataset.id;
+    name = card.dataset.name;
+    price = Number(card.dataset.price);
+  }
 
-    let item = cart.find(i => i.id === id);
+  let item = cart.find(i => i.id === id);
 
-    if (item) item.qty++;
-    else cart.push({ id, name, price, qty: 1 });
+  if (item) {
+    item.qty++;
+  } else {
+    cart.push({ id, name, price, qty: 1 });
+  }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartCount();
-    openCart(); // 🔥 auto open with items
-  });
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  // openCart(); // 🔥 slider se click par bhi open hoga
+  
+    // ✅ 🔥 FIX
+  if (cartDrawer?.classList.contains("open")) {
+    renderCart();
+  }
+    // ✅ popup show karo
+  showToast(`${name} added to cart`);
 });
 
 /* ---------- RENDER CART ---------- */
@@ -108,7 +146,7 @@ function renderCart() {
           </button>
 
           <button class="order-btn"
-            onclick="orderSingleItem(${index})">
+            onclick="goToCheckout()">
             Order
           </button>
         </div>
@@ -171,49 +209,43 @@ function updateCartCount() {
 // }
 
 
-/* ---------- WHATSAPP ---------- */
-function orderOnWhatsApp() {
-  if (!cart.length) return alert("Cart empty");
-
-  let msg = "🛒 *Food Order*%0A%0A";
-  let total = 0;
-
-  cart.forEach(i => {
-    msg += `${i.name} x ${i.qty} = ₹${i.price * i.qty}%0A`;
-    total += i.price * i.qty;
-  });
-
-  msg += `%0A*Total:* ₹${total}`;
-  window.open(`https://wa.me/8989660980?text=${msg}`);
-}
-
 document.addEventListener("DOMContentLoaded", function () {
   updateCartCount();
 });
 
-function buySingleItem(index) {
-  const item = cart[index];
+document.querySelectorAll(".order-now").forEach(btn => {
+  btn.addEventListener("click", function () {
 
-  let msg = `🛒 *Food Order*%0A%0A`;
-  msg += `${item.name} x ${item.qty}%0A`;
-  msg += `Price: ₹${item.price * item.qty}`;
+    const card = this.closest(".menu-card");
 
-  const phone = "8989660980"; // apna WhatsApp number
-  window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
-}
-// order singal items 
-function orderSingleItem(index) {
-  const item = cart[index];
-  if (!item) return;
+    const singleItemCart = [{
+      id: card.dataset.id,
+      name: card.dataset.name,
+      price: Number(card.dataset.price),
+      qty: 1
+    }];
 
-  let msg = "🛒 *Food Order*%0A%0A";
-  msg += `${item.name}%0A`;
-  msg += `Quantity: ${item.qty}%0A`;
-  msg += `Price: ₹${item.price * item.qty}`;
+    // 👇 Checkout ke liye sirf ye item bhejo
+    fetch("/sync-cart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(singleItemCart)
+    }).then(() => {
+      window.location.href = "/checkout";
+    });
 
-  const phone = "8989660980"; // apna WhatsApp number
-  window.open(
-    `https://wa.me/${phone}?text=${msg}`,
-    "_blank"
-  );
+  });
+});
+
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+
+  toast.innerText = message;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 1800);
 }

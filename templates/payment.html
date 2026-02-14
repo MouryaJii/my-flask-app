@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Payment</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=7">
+        <link rel="stylesheet" type="text/css"
+            href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+        <link rel="icon" href="../static/images/websiteicon.png"
+            type="image/x-icon">
+        <title>Fresh Meal | Payment</title>
+        <link rel="stylesheet" href="../static/css/backtotop.css">
+        <link rel="stylesheet" href="../static/css/style.css">
+        <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css'
+            rel='stylesheet'>
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-<style>
+
+      <style>
 /* ====== BACKGROUND ====== */
 body {
   background: linear-gradient(135deg, #fff1eb, #ace0f9);
 }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 
 /* ====== MAIN CONTAINER ====== */
 .checkout-wrapper {
   display: flex;
   gap: 22px;
   max-width: 1100px;
-  margin: 40px auto;
+  margin: 47px auto ;
   padding: 22px;
   font-family: 'Segoe UI', Arial, sans-serif;
   background: transparent;
@@ -147,15 +163,146 @@ body {
 }
 
 </style>
-</head>
 
-<body>
+
+    </head>
+
+    <body>
+        <!-- <div class="main-wrapper">
+            <div class="nav-background">
+                <div class="mobile-logo">
+                    <img src="../static/icons/logo.svg" alt>
+                </div>
+                <div class="mobile-nav">
+                    <div class="cart">
+                        <div class="flex items-center">
+                            <img src="../static/icons/cart-dark.svg" alt>
+                            <a href="{{ url_for('menu') }}" class="cart-count">0
+                                items</a>
+
+                        </div>
+                    </div> -->
+                    <!-- <div class="nav-top">
+                        <ul>
+                            <li>
+                                <a href="{{ url_for('index') }}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('about') }}">About us</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('menu') }}">Menu</a>
+                            </li>
+                             <li>
+                                <a href="{{ url_for('my_orders') }}">My
+                                    Orders</a>
+                            </li> -->
+                            <!-- <li>
+                                <a href="#">Shop</a>
+                            </li> -->
+                            <!-- <li>
+                                <a href="#">Services</a>
+                            </li>
+                            <li>
+                                <a href="#">Contact us</a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('logout') }}">Logout</a>
+                            </li>
+                            <li>
+                                <a href="#">Account</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contact flex items-center">
+                        <img src="../static/icons/phone.svg" alt>
+                        <div>
+                            <h5>Call Us : (+91) 00000-00000</h5>
+                            <h6>E-mail : foodyguys@gmail.com</h6>
+                        </div>
+                    </div>
+                    <div class="time flex items-center">
+                        <img src="../static/icons/clock.svg" alt>
+                        <div>
+                            <h5>Working hours</h5>
+                            <h6>Mon-sat (8:00am - 11:00pm)</h6>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="site-content-wrapper"> -->
+                <!-- <div class="nav-trigger">
+               
+                    <svg width="30" height="30" viewBox="0 0 30 30"
+                        fill="none" xmlns="www.w3.org">
+                        <path d="M4 8H26" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" />
+                        <path d="M4 15H26" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" />
+                        <path d="M4 22H26" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" />
+                    </svg>
+                 
+                </div> -->
+                <!-- <div class="site-content">
+                    <header class="topbar1">
+                        <div
+                            class="container flex justify-between items-center">
+                            <div class="icons"> -->
+                                <!-- <a href="#">
+                                    <img
+                                        src="../static/icons/facebook.svg" alt></a>
+                                <a href="#"><img
+                                        src="../static/icons/twitter.svg"
+                                        alt></a>
+                                <a href="#"><img
+                                        src="../static/icons/google.svg"
+                                        alt></a>
+                                <a href="#"><img
+                                        src="../static/icons/instagram.svg"
+                                        alt></a>
+                                <a href="#"><img
+                                        src="../static/icons/search.svg"
+                                        alt></a> -->
+                                <!-- <a href="{{ url_for('index') }}">Home</a>
+                                <a href="{{ url_for('about') }}">About</a>
+                                <a href="{{ url_for('menu') }}">Menu</a>
+                                <a href="{{ url_for('my_orders') }}">My Orders</a>
+                                <a href="#">Services</a>
+                                <a href="#">Contact</a> -->
+                                
+                            <!-- </div> -->
+                            <!-- <div class="auth flex items-center">
+
+                                <div>
+                                    <img src="../static/icons/user-icon.svg"
+                                        alt>
+                                    <a href="{{ url_for('logout') }}">Logout</a>
+
+                                </div>
+                                <span class="divider">|</span>
+                                <div>
+                                    <img src="../static/icons/edit.svg" alt>
+                                    <a href="#">Account</a>
+                                </div>
+                                <span class="divider">|</span>
+                                <div>
+                                    <img src="../static/icons/cart.svg" alt>
+                                   
+                                    <a href="{{ url_for('menu') }}"
+                                        class="cart-count">0 items</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    <!-- </header> -->
+
+                  
 
 <div class="checkout-wrapper">
 
   <!-- LEFT SIDE -->
   <div class="order-box">
-    <h3>FoodieGuys Terms & Conditions</h3>
+    <h3>𝐅𝐫𝐞𝐬𝐡 𝐌𝐞𝐚𝐥 Terms & Conditions</h3>
 
     <div class="term-block">
       <h4>Order Confirmation</h4>
@@ -203,7 +350,7 @@ The company is not responsible for delays or cancellations caused by incorrect i
   <!-- RIGHT SIDE -->
   <div class="payment-box">
 
-    <div class="payment-logo">FoodieGuys</div>
+    <div class="payment-logo">𝐹𝓇𝑒𝓈𝒽 𝑀𝑒𝒶𝓁</div>
     <div class="payment-title">Complete Payment Securely</div>
 
     <div class="amount-row">
@@ -231,7 +378,41 @@ The company is not responsible for delays or cancellations caused by incorrect i
 
 </div>
 
-<script>
+
+
+
+                        <!--footer - 2  -->
+                        <footer class="copyright">
+                            <div>
+                                copyright &copy; 2025 <a
+                                    href="#">freshmeal.com</a> | All rights
+                                reserved
+                                
+                            </div>
+                            powered by <a href="#">FoodieGuys</a>
+                        </footer>
+                    <!-- </div> -->
+                <!-- </div> -->
+            <!-- </div> -->
+
+            <!-- Back To Top Button -->
+            <!-- <button id="backToTop" title="Go to top">⬆</button> -->
+
+            <script type="text/javascript"
+                src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+            <script type="text/javascript"
+                src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+            <script type="text/javascript"
+                src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+            <script src="../static/js/app.js"></script>
+            <!-- <script src="../static/js/script.js"></script> -->
+            <script src="../static/js/cart.js"></script>
+            <script src="../static/js/menu.js"></script>
+            <script src="../static/js/backtotop.js"></script>
+
+
+
+            <script>
 var options = {
     "key": "{{ razorpay_key }}",
     "amount": "{{ amount * 100 }}",
@@ -246,8 +427,13 @@ var options = {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(response)
         })
-        .then(() => {
-            window.location.href = "/order-success";
+        // .then(() => {
+        //     window.location.href = "/order-success";
+        .then(res => res.json())
+.then(data => {
+    if(data.status === "success"){
+        window.location.href = "/order-success";
+    }
         });
     },
     "theme": {
@@ -261,5 +447,47 @@ document.getElementById("payBtn").onclick = function(){
 };
 </script>
 
-</body>
-</html>
+        </body>
+
+    </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

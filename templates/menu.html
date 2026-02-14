@@ -9,13 +9,38 @@
             href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
         <link rel="icon" href="../static/images/websiteicon.png"
             type="image/x-icon">
-        <title>FoodieGuys | Menu</title>
+        <title>Fresh Meal | Menu</title>
         <link rel="stylesheet" href="../static/css/backtotop.css">
         <link rel="stylesheet" href="../static/css/style.css">
         <link rel="stylesheet" href="../static/css/menu.css">
         <link href='https://cdn.boxicons.com/3.0.6/fonts/basic/boxicons.min.css'
             rel='stylesheet'>
+<style>
+    /* * {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
 
+html, body {
+  overflow-x: hidden;
+  touch-action: manipulation;
+}
+
+button, a {
+  -webkit-user-select: none;
+  user-select: none;
+} */
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+    .cart-items::-webkit-scrollbar {
+    display: none;
+}
+
+</style>
     </head>
 
     <body>
@@ -43,9 +68,9 @@
                             <li>
                                 <a href="{{ url_for('menu') }}">Menu</a>
                             </li>
-                            <!-- <li>
-                                <a href="#">Blog</a>
-                            </li> -->
+                            <li>
+                                <a href="{{url_for('my_orders')}}">My Orders</a>
+                            </li>
                             <!-- <li>
                                 <a href="#">Shop</a>
                             </li> -->
@@ -59,7 +84,7 @@
                                 <a href="{{ url_for('logout') }}">Logout</a>
                             </li>
                             <li>
-                                <a href="#">Register Now</a>
+                                <a href="#">Acount</a>
                             </li>
                         </ul>
                     </div>
@@ -67,14 +92,14 @@
                         <img src="../static/icons/phone.svg" alt>
                         <div>
                             <h5>Call Us : (+91) 00000-00000</h5>
-                            <h6>E-mail : foodyguys@gmail.com</h6>
+                            <h6>E-mail : freshmeal@gmail.com</h6>
                         </div>
                     </div>
                     <div class="time flex items-center">
                         <img src="../static/icons/clock.svg" alt>
                         <div>
                             <h5>Working hours</h5>
-                            <h6>Mon-sat (8:00am - 12:00am)</h6>
+                            <h6>Mon-sat (8:00am - 11:00pm)</h6>
                         </div>
                     </div>
                 </div>
@@ -102,7 +127,8 @@
                                 <a href="{{ url_for('home') }}">Home</a>
                                 <a href="{{ url_for('about') }}">About</a>
                                 <a href="{{ url_for('menu') }}">Menu</a>
-                                <!-- <a href="#">Gallery</a> -->
+                                <a href="{{ url_for('my_orders') }}">My Orders</a>
+                                <a href="#">Services</a>
                                 <a href="#">Contact</a>
                             </div>
                             <div class="auth flex items-center">
@@ -116,7 +142,7 @@
                                 <span class="divider">|</span>
                                 <div>
                                     <img src="../static/icons/edit.svg" alt>
-                                    <a href="#">register now</a>
+                                    <a href="#">Acount</a>
                                 </div>
                                 <span class="divider">|</span>
                                 <div>
@@ -143,7 +169,7 @@
                     <!-- CATEGORY BUTTON SECTION -->
                     <div class="category-section">
                         <button class="category-btn" id="categoryBtn">
-                            Explore Food Category ⌄
+                            View Our Menu  &#8680; 
                         </button>
 
                         <div class="category-dropdown " id="categoryDropdown">
@@ -214,7 +240,7 @@
                                         <button class="cart-btn add-to-cart">
                                             Add To Cart </button>
 
-                                        <button class="order-btn">Order
+                                        <button class="order-btn order-now">Order
                                             Now</button>
                                     </div>
                                 </div>
@@ -236,14 +262,14 @@
                                     <div class="actions">
                                         <button class="cart-btn add-to-cart">
                                             Add To Cart </button>
-                                        <button class="order-btn">Order
+                                        <button  class="order-btn order-now">Order
                                             Now</button>
                                     </div>
                                 </div>
 
                                 <div class="menu-img">
                                     <img
-                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                        src="../static/images/Spring Roll.jpeg">
                                 </div>
                             </div>
 
@@ -259,14 +285,14 @@
                                     <div class="actions">
                                         <button class="cart-btn add-to-cart">
                                             Add To Cart </button>
-                                        <button class="order-btn">Order
+                                        <button class="order-btn order-now">Order
                                             Now</button>
                                     </div>
                                 </div>
 
                                 <div class="menu-img">
                                     <img
-                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                        src="../static/images/Bada Fry.jpg">
                                 </div>
                             </div>
 
@@ -284,14 +310,14 @@
                                     <div class="actions">
                                         <button class="cart-btn add-to-cart">
                                             Add To Cart </button>
-                                        <button class="order-btn">Order
+                                        <button class="order-btn order-now">Order
                                             Now</button>
                                     </div>
                                 </div>
 
                                 <div class="menu-img">
                                     <img
-                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                        src="../static/images/Chilly-Chiken.webp">
                                 </div>
                             </div>
 
@@ -308,14 +334,14 @@
                                     <div class="actions">
                                         <button class="cart-btn add-to-cart">
                                             Add To Cart </button>
-                                        <button class="order-btn">Order
+                                        <button class="order-btn order-now">Order
                                             Now</button>
                                     </div>
                                 </div>
 
                                 <div class="menu-img">
                                     <img
-                                        src="https://images.unsplash.com/photo-1625944525903-b2b9e5d40f3a">
+                                        src="../static/images/Veg Catlet.jpg">
                                 </div>
                             </div>
 
@@ -331,14 +357,14 @@
                                     <div class="actions">
                                         <button class="cart-btn add-to-cart">
                                             Add To Cart </button>
-                                        <button class="order-btn">Order
+                                        <button class="order-btn order-now">Order
                                             Now</button>
                                     </div>
                                 </div>
 
                                 <div class="menu-img">
                                     <img
-                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                        src="../static/images/chicken 65.jpg">
                                 </div>
                             </div>
 
@@ -355,14 +381,14 @@
                                     <div class="actions">
                                         <button class="cart-btn add-to-cart">
                                             Add To Cart </button>
-                                        <button class="order-btn">Order
+                                        <button class="order-btn order-now">Order
                                             Now</button>
                                     </div>
                                 </div>
 
                                 <div class="menu-img">
                                     <img
-                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                        src="../static/images/Ginger Chicken.jpg">
                                 </div>
                             </div>
 
@@ -379,14 +405,15 @@
                                     <div class="actions">
                                         <button class="cart-btn add-to-cart">
                                             Add To Cart </button>
-                                        <button class="order-btn">Order
+                                        <button class="order-btn order-now
+                                        ">Order
                                             Now</button>
                                     </div>
                                 </div>
 
                                 <div class="menu-img">
                                     <img
-                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                        src="../static/images/Chicken pakodi.jpg">
                                 </div>
                             </div>
 
@@ -452,14 +479,14 @@
                                     <div class="actions">
                                         <button class="cart-btn add-to-cart">
                                             Add To Cart </button>
-                                        <button class="order-btn">Order
+                                        <button class="order-btn order-now">Order
                                             Now</button>
                                     </div>
                                 </div>
 
                                 <div class="menu-img">
                                     <img
-                                        src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877">
+                                        src="../static/images/Dal Fry.jpg">
                                 </div>
                             </div>
 
@@ -475,14 +502,14 @@
                                     <div class="actions">
                                         <button class="cart-btn add-to-cart">
                                             Add To Cart </button>
-                                        <button class="order-btn">Order
+                                        <button class="order-btn order-now">Order
                                             Now</button>
                                     </div>
                                 </div>
 
                                 <div class="menu-img">
                                     <img
-                                        src="https://images.unsplash.com/photo-1604908177522-937c3c0b15d6">
+                                        src="../static/images/Bangla Dal.jpg">
                                 </div>
                             </div>
 
@@ -498,14 +525,14 @@
                                     <div class="actions">
                                         <button class="cart-btn add-to-cart">
                                             Add To Cart </button>
-                                        <button class="order-btn">Order
+                                        <button class="order-btn order-now">Order
                                             Now</button>
                                     </div>
                                 </div>
 
                                 <div class="menu-img">
                                     <img
-                                        src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877">
+                                        src="../static/images/Mix Dal.jpg">
                                 </div>
                             </div>
 
@@ -521,14 +548,14 @@
                                     <div class="actions">
                                         <button class="cart-btn add-to-cart">
                                             Add To Cart </button>
-                                        <button class="order-btn">Order
+                                        <button class="order-btn order-now">Order
                                             Now</button>
                                     </div>
                                 </div>
 
                                 <div class="menu-img">
                                     <img
-                                        src="https://images.unsplash.com/photo-1625944525903-b2b9e5d40f3a">
+                                        src="../static/images/dal makhani.webp">
                                 </div>
                             </div>
 
@@ -545,14 +572,14 @@
                                     <div class="actions">
                                         <button class="cart-btn add-to-cart">
                                             Add To Cart </button>
-                                        <button class="order-btn">Order
+                                        <button class="order-btn order-now">Order
                                             Now</button>
                                     </div>
                                 </div>
 
                                 <div class="menu-img">
                                     <img
-                                        src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877">
+                                        src="../static/images/Rajma (Red Kidney Bean Curry).webp">
                                 </div>
                             </div>
 
@@ -571,10 +598,206 @@
                                     updates, and mouth-watering recipes.</p>
                                 <div class="input-wrap">
                                     <input type="email"
-                                        placeholder="email@foodyguys.com">
+                                        placeholder="email@freshmeal.com">
                                     <button>subscribe</button>
                                 </div>
                             </div>
+                        </div>
+                    </section>
+
+                    <section id="rise" class="menu-section">
+
+                        <h2>Rise & Pulao</h2>
+                        <!-- <p class="subtitle">Choose your favorite dishes</p> -->
+
+                        <!-- CATEGORY FILTER -->
+                        <div class="filter-btns">
+                            <button class="filter active"
+                                data-filter="all">All</button>
+                            <button class="filter"
+                                data-filter="veg">Veg</button>
+                            <button  class="filter"
+                                data-filter="nonveg">Non-Veg</button>
+                        </div>
+
+                        <div class="menu-grid">
+
+                            <!-- ITEM -->
+                            <div class="menu-card veg" data-id="Veg-Fried-Rice"
+                                data-name="Veg Fried Rice" data-price="50">
+                                <div class="menu-info">
+                                    <h3>Veg Fried Rice</h3>
+                                    <p class="desc">Vegetable fried rice is made with cooked rice, fresh vegetables like carrot, beans, capsicum, and mild spices.</p>
+                                    <span class="price">&#8377;50</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+
+                                        <button class="order-btn order-now">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="../static/images/Veg Fried Rice.webp">
+                                </div>
+                            </div>
+
+                            <div class="menu-card veg" data-id="Jeera-Rice"
+                                data-name="Jeera Rice" data-price="70">
+                                <div class="menu-info">
+                                    <h3>Jeera Rice</h3>
+                                    <p class="desc">Jeera rice is a simple Indian rice dish cooked with cumin seeds and ghee. It has a mild aroma and is usually served with dal or curry.</p>
+                                    <span class="price">&#8377;70</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn order-now">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="../static/images/Jeera Rice.webp">
+                                </div>
+                            </div>
+
+                            <div class="menu-card veg" data-id="Paneer-Rice"
+                                data-name="Paneer Rice" data-price="150">
+                                <div class="menu-info">
+                                    <h3>Paneer Rice</h3>
+                                    <p class="desc">Paneer rice is prepared with soft paneer cubes, rice, and flavorful spices. It is rich in protein and loved by vegetarians.</p>
+                                    <span class="price">&#8377;150</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn order-now">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="../static/images/Paneer Rice.jpg">
+                                </div>
+                            </div>
+
+                            <div class="menu-card nonveg"
+                                data-id="Chicken-Fried-Rice"
+                                data-name="Chicken Fried Rice" data-price="200">
+                                <div class="menu-info">
+                                    <h3>Chicken Fried Rice</h3>
+                                    <p class="desc">Chicken fried rice is made by stir-frying rice with chicken pieces, vegetables, and sauces. It is a popular street food and very filling.</p>
+                                    <span class="price">&#8377;200</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn order-now">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="../static/images/chicken fried rise.jpg">
+                                </div>
+                            </div>
+
+                            <div class="menu-card veg" data-id="Veg-Pulao"
+                                data-name="Veg Pulao" data-price="80">
+                                <div class="menu-info">
+                                    <h3>Veg Pulao</h3>
+                                    <p class="desc">Veg pulao is cooked with rice, mixed vegetables, and whole spices like bay leaf and cloves. It is mildly spicy and very aromatic.</p>
+                                    <span class="price">&#8377;80</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn order-now">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="../static/images/Veg Pulao.jpg">
+                                </div>
+                            </div>
+
+                            <div class="menu-card nonveg" data-id="Chicken-Biryani"
+                                data-name="Chicken Biryani" data-price="100">
+                                <div class="menu-info">
+                                    <h3>Chicken Biryani</h3>
+                                    <p class="desc">Chicken biryani is a flavorful rice dish made with aromatic basmati rice, tender chicken pieces, and a blend of spices. It is a popular dish in Indian cuisine.</p>
+                                      
+                                    <span class="price">&#8377;100</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn order-now">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="../static/images/Chicken Biryani.jpg">
+                                </div>
+                            </div>
+
+                            <div class="menu-card nonveg"
+                                data-id="Egg-Fried-Rice"
+                                data-name="Egg Fried Rice" data-price="120">
+                                <div class="menu-info">
+                                    <h3>Egg Fried Rice</h3>
+                                    <p class="desc">Fragrant egg fried rice made with aromatic basmati rice, scrambled eggs, and a blend of spices.</p>
+                                       
+                                    <span class="price">&#8377;120</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn order-now">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="../static/images/Egg Fried Rice.jpg">
+                                </div>
+                            </div>
+
+                            <div class="menu-card nonveg"
+                                data-id="Mutton-Biryani"
+                                data-name="Mutton Biryani" data-price="150">
+                                <div class="menu-info">
+                                    <h3>Mutton Biryani</h3>
+                                    <p class="desc">Mutton biryani is a rich and aromatic rice dish made with tender mutton pieces, fragrant basmati rice, and a blend of whole spices.</p>
+                                    
+                                    <span class="price">&#8377;150</span>
+
+                                    <div class="actions">
+                                        <button class="cart-btn add-to-cart">
+                                            Add To Cart </button>
+                                        <button class="order-btn order-now">Order
+                                            Now</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-img">
+                                    <img
+                                        src="../static/images/Mutton Biryani.jpg">
+                                </div>
+                            </div>
+
                         </div>
                     </section>
 
@@ -583,35 +806,37 @@
                         <div class="container">
                             <div class="box">
                                 <h3>about us</h3>
-                                <p>FoodieGuys brings you delicious food crafted
+                                <p>Fresh Meal brings you delicious food crafted
                                     with passion. Fresh ingredients, modern
                                     taste & love in every bite.</p>
-                                <button class="btn btn-secondary"> Read
+                                  <a href="{{url_for ('about')}}">
+                                    <button class="btn btn-secondary"> Read
                                     More</button>
+                                </a>
                             </div>
                             <div class="box">
                                 <h3>quick links</h3>
                                 <ul>
                                     <li>
-                                        <a href="#">Home</a>
+                                        <a href="{{url_for('home')}}">Home</a>
                                     </li>
                                     <li>
-                                        <a href="#">About</a>
+                                        <a href="{{url_for('about')}}">About</a>
                                     </li>
                                     <li>
-                                        <a href="#">Products</a>
+                                        <a href="{{url_for('menu')}}">Menu</a>
                                     </li>
                                     <li>
-                                        <a href="#">Blog</a>
+                                        <a href="{{url_for('my_orders')}}">My Orders</a>
                                     </li>
                                     <li>
                                         <a href="#">Services</a>
                                     </li>
                                     <li>
-                                        <a href="#">Gallery</a>
+                                        <a href="#">Contact</a>
                                     </li>
                                     <li>
-                                        <a href="#">Contact</a>
+                                        <a href="#">Acount</a>
                                     </li>
                                 </ul>
                             </div>
@@ -696,9 +921,12 @@
                         <footer class="copyright">
                             <div>
                                 copyright &copy; 2025 <a
-                                    href="#">foodyguys.com</a> | All rights
+                                    href="#">freshmeal.com</a> | All rights
                                 reserved
                             </div>
+                            powered by <a href="#">FoodieGuys
+                                
+                            </a>
                         </footer>
                     </div>
                 </div>
@@ -726,11 +954,11 @@
     <button type="submit">Order Now</button>
 </form> -->
 
-
+<!-- 
                         <button class="whatsapp-btn"
                             onclick="orderOnWhatsApp()">
                             Order on WhatsApp
-                        </button>
+                        </button> -->
                     </div>
                 </div>
 
@@ -791,6 +1019,7 @@ function goToCheckout() {
 
 
 
+<div id="toast" class="toast"></div>
 
         </body>
 

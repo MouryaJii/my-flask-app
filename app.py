@@ -5,6 +5,7 @@ import MySQLdb.cursors
 from flask_bcrypt import Bcrypt
 from functools import wraps
 from flask import make_response
+from datetime import datetime
 import json
 import razorpay
 
@@ -166,6 +167,10 @@ def add_header(response):
 
 
 
+
+
+
+
 # ----------CHECKOUT PAGE------------------
 @app.route("/checkout")
 @login_required
@@ -251,7 +256,36 @@ def create_order():
 @app.route("/order-success")
 @login_required
 def order_success():
-    return render_template("order_success.html")
+    # return render_template("order_success.html")
+    
+     # ❌ Direct access block
+    if not session.get('order_success_allowed'):
+        return redirect(url_for('home'))
+
+    data = session.get("success_order")
+    if not data:
+        return redirect(url_for("home"))
+    
+       # 🔥 IMPORTANT: one-time access
+    session.pop('order_success_allowed', None)
+
+
+    delivery_charge = 10
+    items = data.get("items", [])
+    total_amount = sum(item['price'] * item['qty'] for item in items) + delivery_charge
+
+    
+    order_date = datetime.now().strftime("%d/%m/%Y")
+    return render_template(
+        "order_success.html",
+        # order_id=data["order_id"],
+        payment_id=data["payment_id"],
+          delivery_charge=delivery_charge,
+        order_date=order_date,
+        total_amount=data["total_amount"],
+        items=data["items"]
+    )
+
 
 
 # ---------------------PAYMENT SUCCESS → SAVE ORDER------------------
@@ -286,14 +320,15 @@ def payment_success():
     # 2️⃣ Save order
     cur.execute("""
         INSERT INTO orders
-        (user_id, total_amount, payment_status, payment_id, address_id)
-        VALUES (%s,%s,%s,%s,%s)
+        (user_id, total_amount, payment_status, payment_id, address_id ,status)
+        VALUES (%s,%s,%s,%s,%s,%s)
     """, (
         user_id,
         session['amount'],
         "Success",
         data['razorpay_payment_id'],
-        address_id
+        address_id,
+        "placed"
     ))
     order_id = cur.lastrowid
 
@@ -309,6 +344,7 @@ def payment_success():
             item['qty'],
             item['price']
         ))
+        
 
     mysql.connection.commit()
 
@@ -316,12 +352,157 @@ def payment_success():
     session.pop('cart', None)
     session.pop('checkout_form', None)
 
+    session['success_order'] = {
+    "order_id": order_id,
+    "payment_id": data['razorpay_payment_id'],
+    "order_date": "Today",  # ya DB se
+    "total_amount": session['amount'],
+    "items": cart
+}
+
+    session['order_success_allowed'] = True  
+
     return {"status": "success"}
 
+# -----------myorders page-----------------
+@app.route("/my-orders")
+@login_required
+def my_orders():
+
+    user_id = session['user_id']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    # 🔥 ALL orders of user
+    cursor.execute("""
+        SELECT id, total_amount, status, created_at
+        FROM orders
+        WHERE user_id = %s
+        ORDER BY id DESC
+    """, (user_id,))
+    orders = cursor.fetchall()
+
+    # print("USER ID:", user_id)
+    # print("ORDERS:", orders)  # DEBUG
+
+    return render_template(
+        "myorders.html",
+        orders=orders
+    )
+# @app.route("/my-orders")
+# @login_required
+# def my_orders():
+
+    # 🔒 Login check
+    # if 'user_id' not in session:
+    #     return redirect('/login')
+
+    # user_id = session['user_id']
+    # cursor = mysql.connection.cursor()
+
+    # 🧾 Latest order of logged-in user
+    # cursor.execute("""
+    #     SELECT id , status, created_at
+    #     FROM orders 
+    #     WHERE user_id = %s 
+    #     ORDER BY id DESC 
+    # """, (user_id,))
+    # order = cursor.fetchone()
+    
+    # print("USER ID:", user_id)
+    # print("ORDERS:", order)   # 👈 DEBUG
+
+    # if not order:
+    #     return render_template("myorders.html", items=[], subtotal=0, delivery_fee=0, total_amount=0)
+
+    # order_id = order['id']
+
+    # 📦 Order items
+    # cursor.execute("""
+    #     SELECT item_name, price, quantity
+    #     FROM order_items
+    #     WHERE order_id = %s
+    # """, (order_id,))
+    # items = cursor.fetchall()
+
+    # 💰 Calculations
+    # subtotal = sum(i['price'] * i['quantity'] for i in items)
+    # delivery_fee = 10
+    # total_amount = subtotal + delivery_fee
+
+    # invoice_date = datetime.now().strftime("%d/%m/%Y %H:%M")
+
+    # return render_template(
+    #     "myorders.html",
+    #     items=items,
+    #     subtotal=subtotal,
+    #     delivery_fee=delivery_fee,
+    #     total_amount=total_amount,
+    #        invoice_date=invoice_date,
+    #          order_status=order['status']
+    # )
 
 
 
 
+# ----------------------sigle order details page--------------------------
+
+@app.route("/order/<int:order_id>")
+@login_required
+def order_details(order_id):
+
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    cursor.execute("""
+        SELECT * FROM orders
+        WHERE id=%s AND user_id=%s
+    """, (order_id, session['user_id']))
+    order = cursor.fetchone()
+
+    if not order:
+        flash("Order not found", "danger")
+        return redirect("/my-orders")
+
+    cursor.execute("""
+        SELECT item_name, price, quantity
+        FROM order_items
+        WHERE order_id=%s
+    """, (order_id,))
+    items = cursor.fetchall()
+
+    subtotal = sum(i['price'] * i['quantity'] for i in items)
+    delivery_fee = 10
+
+    return render_template(
+        "myorder.html",
+        items=items,
+        subtotal=subtotal,
+        delivery_fee=delivery_fee,
+        total_amount=order['total_amount'],
+        invoice_date=order['created_at'].strftime("%d/%m/%Y %H:%M"),
+        order_status=order['status']
+    )
+
+# --------------------ORDER STATUS API----------------------
+
+
+@app.route("/order-status/<int:order_id>")
+@login_required
+def order_status(order_id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute(
+        "SELECT status FROM orders WHERE id=%s AND user_id=%s",
+        (order_id, session['user_id'])
+    )
+    order = cursor.fetchone()
+
+    if not order:
+        return jsonify({"error": "Not found"}), 404
+
+    return jsonify({"status": order['status']})
+
+
+
+# ---------------- OLD CHECKOUT PAGES (COMMENTED) ----------------
 # @app.route("/checkout")
 # @login_required
 # def checkout():
@@ -386,4 +567,4 @@ def payment_success():
 # ---------------- RUN ----------------
 
 if __name__ == '__main__':
-    app.run(debug=True,host="0.0.0.0",port=5000)
+    app.run(debug=True, host="0.0.0.0", port=5000)
