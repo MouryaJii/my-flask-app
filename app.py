@@ -592,6 +592,70 @@ def order_status(order_id):
 
 #     return render_template("myorders.html", orders=orders)
 
+
+@app.route("/create-tables")
+def create_tables():
+    cur = mysql.connection.cursor()
+
+    # USERS
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(100) UNIQUE,
+        email VARCHAR(100) UNIQUE,
+        password VARCHAR(255)
+    )
+    """)
+
+    # ADDRESSES
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS addresses (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT,
+        mobile VARCHAR(20),
+        house VARCHAR(255),
+        street VARCHAR(255),
+        landmark VARCHAR(255),
+        city VARCHAR(100),
+        pincode VARCHAR(20),
+        address_type VARCHAR(50),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+
+    # ORDERS
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS orders (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT,
+        total_amount DECIMAL(10,2),
+        payment_status VARCHAR(50),
+        payment_id VARCHAR(100),
+        address_id INT,
+        status VARCHAR(50),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+
+    # ORDER ITEMS
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS order_items (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        order_id INT,
+        item_name VARCHAR(255),
+        quantity INT,
+        price INT
+    )
+    """)
+
+    mysql.connection.commit()
+    cur.close()
+
+    return "All Tables Created Successfully!"
+
+
+
+
 # ---------------- RUN ----------------
 
 if __name__ == '__main__':
