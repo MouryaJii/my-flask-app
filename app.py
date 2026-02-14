@@ -1,3 +1,4 @@
+import os
 from xmlrpc import client
 from flask import Flask, render_template, request, redirect, url_for, session, flash,jsonify
 from flask_mysqldb import MySQL
@@ -12,14 +13,28 @@ import razorpay
 
 
 app = Flask(__name__)
-app.secret_key = "secret123"
+app.secret_key = "SECRET_KEY"
+
+
+@app.after_request
+def secure_headers(response):
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    return response
+
 
 # ---------------- MYSQL CONFIG ----------------
+app.config['MYSQL_HOST'] = os.environ.get("MYSQL_HOST")
+app.config['MYSQL_USER'] = os.environ.get("MYSQL_USER")
+app.config['MYSQL_PASSWORD'] = os.environ.get("MYSQL_PASSWORD")
+app.config['MYSQL_DB'] = os.environ.get("MYSQL_DB")
+app.config['MYSQL_PORT'] = int(os.environ.get("MYSQL_PORT", 3306))
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''   # XAMPP default
-app.config['MYSQL_DB'] = 'users_db'
+# app.config['MYSQL_HOST'] = 'localhost'
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = ''   # XAMPP default
+# app.config['MYSQL_DB'] = 'users_db'
 # app.config['MYSQL_PORT'] = 3307
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
@@ -29,7 +44,7 @@ bcrypt = Bcrypt(app)
 
 # RAZORPAY
 razorpay_client = razorpay.Client(
-    auth=("rzp_test_S7iRmjZi7yZupx", "BwGBNcISNA3F7uSssIAM30Oh")
+    auth=("RAZORPAY_KEY", "RAZORPAY_SECRET")
 )
 # ---------------- ROUTES ----------------
 
@@ -248,7 +263,7 @@ def create_order():
         "payment.html",
         order_id=rp_order['id'],
         amount=total,
-        razorpay_key="rzp_test_S7iRmjZi7yZupx"
+        razorpay_key="RAZORPAY_KEY"
     )
 
 # ----------------ORDER SUCCESS PAGE------------------
@@ -353,16 +368,29 @@ def payment_success():
     session.pop('checkout_form', None)
 
     session['success_order'] = {
-    "order_id": order_id,
-    "payment_id": data['razorpay_payment_id'],
-    "order_date": "Today",  # ya DB se
-    "total_amount": session['amount'],
-    "items": cart
-}
+        "order_id": order_id,
+        "payment_id": data['razorpay_payment_id'],
+        "order_date": "Today",  # ya DB se
+        "total_amount": session['amount'],
+        "items": cart
+    }
 
-    session['order_success_allowed'] = True  
+    session['order_success_allowed'] = True
+    
+    # Verify payment signature
+    from razorpay.errors import SignatureVerificationError
+    
+    try:
+        razorpay_client.utility.verify_payment_signature({
+            'razorpay_order_id': data['razorpay_order_id'],
+            'razorpay_payment_id': data['razorpay_payment_id'],
+            'razorpay_signature': data['razorpay_signature']
+        })
+    except SignatureVerificationError:
+        return {"status": "failed"}, 400
 
     return {"status": "success"}
+
 
 # -----------myorders page-----------------
 @app.route("/my-orders")
@@ -567,4 +595,4 @@ def order_status(order_id):
 # ---------------- RUN ----------------
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run( host="0.0.0.0", port=5000)
